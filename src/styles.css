@@ -1,1 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import "tailwindcss";
+@plugin '@midudev/tailwind-animations';
+@import "lenis/dist/lenis.css";
+
+
+@theme {
+    /* Colors */
+    --color-purple-dark: #332b7f;
+    --color-purple: #3D348B;
+    --color-purple-light: #7678ED;
+    --color-yellow: #F7B801;
+    --color-orange-light: #F59E0D;
+    --color-orange: #F35B04;
+
+    /* Fonts */
+    --font-sans: "PT Mono", system-ui, sans-serif;
+    --font-pixel: "Press Start 2P", system-ui, sans-serif;
+
+}
+
+
