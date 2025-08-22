@@ -7,4 +7,8 @@ export const routes: Routes = [
         path: '',
         component: Home
     },
+    {
+        path: 'particles',
+        component: Particles
+    }
 ];

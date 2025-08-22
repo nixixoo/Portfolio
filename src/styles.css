@@ -19,4 +19,23 @@
     --font-pixel: "Press Start 2P", system-ui, sans-serif;
 }
 
+  /* Para navegadores WebKit (Chrome, Safari, Edge) */
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Para Firefox */
+  html {
+    scrollbar-width: none;
+  }
+  
+  /* Método alternativo más específico */
+  body {
+    -ms-overflow-style: none;  /* IE y Edge */
+    scrollbar-width: none;     /* Firefox */
+  }
+  
+  body::-webkit-scrollbar {
+    display: none;             /* Chrome, Safari, Opera */
+  }
   

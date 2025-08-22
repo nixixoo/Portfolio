@@ -1,5 +1,7 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Inject, Injectable, OnDestroy } from '@angular/core';
 import Lenis from 'lenis';
+import { PLATFORM_ID } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
@@ -7,30 +9,37 @@ import Lenis from 'lenis';
 export class LenisService implements OnDestroy {
   private lenis: Lenis | null = null;
 
-  constructor() {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
-  init() {
+  init(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+
     if (this.lenis) {
       this.destroy();
     }
 
     this.lenis = new Lenis({
-      autoRaf: true, // lenis controlls automatically the loop animation
-      lerp: 0.1, // controls speed, 0.1 smoother 1 direct
-      duration: 1.2, // controls duration of scroll
-      orientation: 'vertical', // scroll direction
-      smoothWheel: true, // smooth mouse wheel
+      autoRaf: true,
+      lerp: 0.1,
+      duration: 1.2,
+      orientation: 'vertical',
+      smoothWheel: true,
     });
   }
 
-destroy() {
-  if (this.lenis) {
-    this.lenis.destroy();
-    this.lenis = null;
+  destroy(): void {
+    if (this.lenis) {
+      this.lenis.destroy();
+      this.lenis = null;
+    }
   }
-}
+
+  getLenis(): Lenis | null {
+    return this.lenis;
+  }
 
   ngOnDestroy(): void {
     this.destroy();
   }
+
 }
