@@ -25,6 +25,22 @@ export class LenisService implements OnDestroy {
       orientation: 'vertical',
       smoothWheel: true,
     });
+
+    this.lenis.on('scroll', ({ scroll, limit }) => {
+      const progress = scroll / limit; // 0 → 1
+      const track = document.querySelector<HTMLElement>('#custom-scrollbar');
+      const thumb = document.querySelector<HTMLElement>('#custom-scrollbar .scrollbar-thumb');
+    
+      if (track && thumb) {
+        const trackHeight = track.offsetHeight;
+        const thumbHeight = thumb.offsetHeight;
+    
+        // espacio disponible = trackHeight - thumbHeight
+        const available = trackHeight - thumbHeight;
+    
+        thumb.style.top = `${progress * available}px`;
+      }
+    });
   }
 
   destroy(): void {
@@ -41,5 +57,4 @@ export class LenisService implements OnDestroy {
   ngOnDestroy(): void {
     this.destroy();
   }
-
 }
