@@ -1,14 +1,15 @@
 import { Routes } from '@angular/router';
 import { Home } from './pages/home/home';
-import { Particles } from './components/particles/particles';
+import { HomeAnimation } from './components/home-animation/home-animation';
 
 export const routes: Routes = [
     {
-        path: '',
+        path: 'home',
         component: Home
     },
     {
-        path: 'particles',
-        component: Particles
+        path: 'home-animation',
+        component: HomeAnimation
     }
 ];
+    

@@ -1,0 +1,32 @@
+<div
+  class="w-full min-h-screen grid grid-cols-5 font-pixel bg-purple "
+ 
+>
+  @for (col of columns; track $index; let colIndex = $index) {
+  <div class="h-full flex flex-col items-center justify-center gap-4 transition-opacity duration-500"
+  [class.opacity-0]="!isHydrated()"
+  [class.opacity-100]="isHydrated()">
+    @for (row of rows; track $index; let rowIndex = $index) {
+    <div
+      class="text-white text-2xl font-bold whitespace-nowrap transition-all duration-500"
+      [class.text-yellow]="
+        colIndex === centerCol() && rowIndex === centerRow() && isAnimationActive()
+      "
+      [class.text-4xl]="colIndex === centerCol() && rowIndex === centerRow() && isAnimationActive()"
+      [class.bg-purple]="
+        colIndex === centerCol() && rowIndex === centerRow() && isAnimationActive()
+      "
+      [class.px-6]="colIndex === centerCol() && rowIndex === centerRow() && isAnimationActive()"
+      [class.py-4]="colIndex === centerCol() && rowIndex === centerRow() && isAnimationActive()"
+      [class.z-10]="colIndex === centerCol() && rowIndex === centerRow() && isAnimationActive()"
+      [class.animate-fade-in-up]="shouldShowFadeIn()"
+      [class.animate-fade-out]="shouldShowFadeOut()"
+      [class.invisible]="!shouldShowText()"
+      [class.visible]="shouldShowText()"
+    >
+      Nicolás Aliaga
+    </div>
+    }
+  </div>
+  }
+</div>

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Scrollbar } from './scrollbar';
+import { HomeAnimation } from './home-animation';
 
-describe('Scrollbar', () => {
-  let component: Scrollbar;
-  let fixture: ComponentFixture<Scrollbar>;
+describe('HomeAnimation', () => {
+  let component: HomeAnimation;
+  let fixture: ComponentFixture<HomeAnimation>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Scrollbar]
+      imports: [HomeAnimation]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(Scrollbar);
+    fixture = TestBed.createComponent(HomeAnimation);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
