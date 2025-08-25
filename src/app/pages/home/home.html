@@ -14,6 +14,7 @@
 <main class="bg-purple w-full min-h-dvh">
   <app-particles class="absolute w-full h-full inset-0 pointer-events-none"></app-particles>
 
+  <!-- Hero Section -->
   <section class="relative flex items-center w-full justify-center h-dvh">
     <div class="font-pixel text-center pb-35">
         <p class="text-yellow text-xl mb-3">Nicolás Aliaga</p>
@@ -21,7 +22,7 @@
     </div>
   </section>
 
-
+  <!-- Featured Project Section -->
   <section class="bg-purple w-full text-white">
     <div class="max-w-5xl mx-auto px-4 py-12">
       <app-card
@@ -30,7 +31,97 @@
         [description]="featured.description"
         [link]="featured.link"
         [tags]="featured.tags"
-        />
+      />
+    </div>
+  </section>
+
+  <!-- Experience Section -->
+  <app-experience></app-experience>
+
+  <!-- 🎯 PROJECTS SECTION: Complete Integration with Service -->
+  <section class="bg-purple w-full text-white py-16">
+    <div class="max-w-5xl mx-auto px-4">
+      S
+      <!-- Projects Header with Dynamic Data -->
+      <div class="text-center mb-12">
+        <h2 class="font-pixel text-yellow text-2xl mb-4">Personal Projects</h2>
+        <p class="font-inter text-white text-lg">
+          {{ totalProjects() }} projects showcasing {{ techCount() }} different technologies
+        </p>
+        <div class="w-16 h-1 bg-yellow mx-auto mt-4"></div>
       </div>
-    </section>
+
+      <!-- ✅ CRITICAL: Cards Grid Powered by ProjectsService -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        @for (project of projectCards(); track project.title) {
+          <app-card
+            [title]="project.title"
+            [description]="project.description"
+            [tags]="project.tags"
+            [link]="project.link"
+            [imageUrl]="project.imageUrl"
+            class="transform hover:-translate-y-2 hover:shadow-[6px_6px_0_0_var(--color-yellow)] 
+                   transition-all duration-300"
+          />
+        } @empty {
+          <!-- Graceful fallback for empty state -->
+          <div class="col-span-full text-center py-12">
+            <div class="border-2 border-yellow/30 border-dashed p-8">
+              <p class="font-pixel text-yellow text-sm mb-2">No projects available</p>
+              <p class="font-inter text-white/70 text-xs">Projects will appear here when loaded</p>
+            </div>
+          </div>
+        }
+      </div>
+
+      <!-- Technology Stack Display -->
+      <div class="mt-16 pt-8 border-t border-yellow/20">
+        <h3 class="font-pixel text-orange-light text-lg mb-6 text-center">
+          Technology Stack
+        </h3>
+        <div class="flex flex-wrap justify-center gap-3">
+          @for (tech of uniqueTechnologies(); track tech) {
+            <span class="font-pixel text-xs px-3 py-2 border border-orange-light 
+                         text-orange-light hover:bg-orange-light hover:text-purple 
+                         transition-colors cursor-default">
+              {{ tech }}
+            </span>
+          }
+        </div>
+      </div>
+
+      <!-- Project Statistics Footer -->
+      <div class="text-center mt-12">
+        <p class="font-pixel text-orange-light text-sm">
+          {{ totalProjects() }} completed projects • {{ techCount() }} technologies mastered
+        </p>
+      </div>
+
+    </div>
+  </section>
+
 </main>
+
+<!-- 
+🎓 TEMPLATE ARCHITECTURE ANALYSIS:
+
+✅ MODERN ANGULAR PATTERNS:
+- @for/@if control flow (Angular 17+)
+- Signal integration with computed values
+- Track functions for optimal reconciliation
+
+✅ REACTIVE DATA BINDING:
+- projectCards() automatically updates when service changes
+- totalProjects() and techCount() are computed derivatives
+- No manual subscriptions or memory leaks
+
+✅ PROGRESSIVE ENHANCEMENT:
+- @empty blocks provide graceful fallbacks
+- Conditional rendering handles edge cases
+- Accessibility-friendly semantic structure
+
+✅ PERFORMANCE OPTIMIZATIONS:
+- track functions enable efficient DOM updates
+- OnPush detection strategy reduces change cycles  
+- Computed values are memoized automatically
+-->

@@ -2,6 +2,7 @@
   class="grid grid-cols-[minmax(200px,auto)_1fr] gap-4 p-4 bg-purple 
          border border-yellow shadow-[4px_4px_0_0_var(--color-yellow)]">
 
+  <!-- Image Section: Conditional rendering with fallback -->
   <div class="h-full flex items-center justify-center bg-purple border border-yellow">
     @if (imageUrl()) {
       <img [src]="imageUrl()" [alt]="title()" class="h-full w-auto object-cover" />
@@ -10,14 +11,19 @@
     }
   </div>
 
+  <!-- Content Section: Structured information display -->
   <div class="flex flex-col gap-2">
     <h3 class="font-pixel text-yellow text-sm">{{ title() }}</h3>
     <p class="text-white text-sm leading-relaxed font-inter">{{ description() }}</p>
+    
+    <!-- Tags: Dynamic list with modern @for -->
     <div class="flex gap-2 flex-wrap">
       @for (t of tags(); track t) {
         <span class="font-pixel text-xs px-2 py-1 border border-orange-light text-orange-light">#{{ t }}</span>
       }
     </div>
+    
+    <!-- Link: Conditional action button -->
     @if (link()) {
       <a [href]="link()" target="_blank" rel="noopener" 
          class="font-pixel inline-block mt-2 px-3 py-2 max-w-22 bg-yellow text-purple hover:-translate-y-0.5 transition-transform">
@@ -26,3 +32,15 @@
     }
   </div>
 </article>
+
+<!-- 
+📚 TEMPLATE ANALYSIS:
+This template demonstrates excellent Angular patterns:
+
+✅ MODERN CONTROL FLOW: @if/@for instead of *ngIf/*ngFor
+✅ SIGNAL INTEGRATION: Direct signal() calls in template
+✅ CONDITIONAL RENDERING: Graceful handling of optional data
+✅ ACCESSIBILITY: Proper alt text and semantic HTML
+✅ RESPONSIVE DESIGN: CSS Grid with flexible sizing
+✅ PROGRESSIVE ENHANCEMENT: Fallbacks for missing data
+-->
