@@ -1,10 +1,21 @@
+@if (showEntryAnimation()) {
+  <div 
+    class="fixed inset-0 bg-purple flex items-center justify-center overflow-hidden z-50 transition-opacity duration-800"
+    [class.opacity-0]="isAnimationFadingOut()"
+    [class.opacity-100]="!isAnimationFadingOut()"
+  >
+    <app-home-animation 
+      (animationComplete)="onEntryAnimationComplete()"
+      (fadeOutStarted)="onAnimationFadeOutStarted()"
+    />
+  </div>
+}
+
 <main class="bg-purple w-full min-h-dvh">
   <app-particles class="absolute w-full h-full inset-0 pointer-events-none"></app-particles>
 
   <section class="relative flex items-center w-full justify-center h-dvh">
-
-
-    <div class="font-pixel text-center">
+    <div class="font-pixel text-center pb-18">
         <p class="text-yellow text-xl mb-3">COMPUTER ENGINEER</p>
         <h1 class="text-4xl text-white">Nicolás Aliaga</h1>
     </div>

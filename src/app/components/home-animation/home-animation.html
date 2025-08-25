@@ -1,32 +1,27 @@
-<div
-  class="w-full min-h-screen grid grid-cols-5 font-pixel bg-purple "
- 
->
-  @for (col of columns; track $index; let colIndex = $index) {
-  <div class="h-full flex flex-col items-center justify-center gap-4 transition-opacity duration-500"
-  [class.opacity-0]="!isHydrated()"
-  [class.opacity-100]="isHydrated()">
-    @for (row of rows; track $index; let rowIndex = $index) {
-    <div
-      class="text-white text-2xl font-bold whitespace-nowrap transition-all duration-500"
-      [class.text-yellow]="
-        colIndex === centerCol() && rowIndex === centerRow() && isAnimationActive()
-      "
-      [class.text-4xl]="colIndex === centerCol() && rowIndex === centerRow() && isAnimationActive()"
-      [class.bg-purple]="
-        colIndex === centerCol() && rowIndex === centerRow() && isAnimationActive()
-      "
-      [class.px-6]="colIndex === centerCol() && rowIndex === centerRow() && isAnimationActive()"
-      [class.py-4]="colIndex === centerCol() && rowIndex === centerRow() && isAnimationActive()"
-      [class.z-10]="colIndex === centerCol() && rowIndex === centerRow() && isAnimationActive()"
-      [class.animate-fade-in-up]="shouldShowFadeIn()"
-      [class.animate-fade-out]="shouldShowFadeOut()"
-      [class.invisible]="!shouldShowText()"
-      [class.visible]="shouldShowText()"
-    >
-      Nicolás Aliaga
-    </div>
+<div class="w-full h-full grid font-pixel"
+     [style.gridTemplateColumns]="'repeat(' + columns.length + ', minmax(0, 1fr))'"
+     [style.gridTemplateRows]="'repeat(' + rows.length + ', minmax(0, 1fr))'"
+     >
+
+  @for (rowIndex of rows; track rowIndex; let r = $index) {
+    @for (colIndex of columns; track colIndex; let c = $index) {
+      <div class="flex items-center justify-center">
+        <div
+          class="text-white text-2xl font-bold whitespace-nowrap"
+          [class.text-yellow]="c === centerCol() && r === centerRow() && isAnimationActive()"
+          [class.text-4xl]="c === centerCol() && r === centerRow() && isAnimationActive()"
+          [class.bg-purple]="c === centerCol() && r === centerRow() && isAnimationActive()"
+          [class.px-6]="c === centerCol() && r === centerRow() && isAnimationActive()"
+          [class.py-4]="c === centerCol() && r === centerRow() && isAnimationActive()"
+          [class.z-10]="c === centerCol() && r === centerRow() && isAnimationActive()"
+          [class.animate-fade-in-up]="shouldShowFadeIn()"
+          [class.animate-fade-out]="shouldShowFadeOut()"
+          [class.invisible]="!shouldShowText()"
+          [class.visible]="shouldShowText()"
+        >
+          Nicolás Aliaga
+        </div>
+      </div>
     }
-  </div>
   }
 </div>

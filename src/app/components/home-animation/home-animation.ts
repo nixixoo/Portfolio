@@ -6,8 +6,7 @@ import {
   signal, 
   computed, 
   afterNextRender,
-  Injector,
-  runInInjectionContext
+  output
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
@@ -19,16 +18,16 @@ import { isPlatformBrowser } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeAnimation {
-  // Reactive state using signals
+  animationComplete = output<void>();
+  fadeOutStarted = output<void>(); // Nuevo output
+
   public readonly isHydrated = signal(false);
   private readonly animationPhase = signal<'initial' | 'showing' | 'hiding'>('initial');
   private readonly isBrowser: boolean;
 
-  // Static data
   readonly columns = [1, 2, 3, 4, 5];
   readonly rows = Array.from({ length: 30 });
 
-  // Computed values for better performance
   readonly centerCol = computed(() => Math.floor(this.columns.length / 2));
   readonly centerRow = computed(() => Math.floor(this.rows.length / 2));
   readonly isAnimationActive = computed(() => this.isHydrated() && this.animationPhase() !== 'initial');
@@ -41,19 +40,14 @@ export class HomeAnimation {
     this.animationPhase() === 'hiding' && this.isHydrated()
   );
 
-  // Nueva computed property para controlar visibilidad del texto
   readonly shouldShowText = computed(() => {
     if (!this.isBrowser) return false;
     return this.isHydrated() && this.animationPhase() !== 'initial';
   });
 
-  constructor(
-    @Inject(PLATFORM_ID) platformId: Object,
-    private injector: Injector // ← Clave: Inyectamos el Injector
-  ) {
+  constructor(@Inject(PLATFORM_ID) platformId: Object) {
     this.isBrowser = isPlatformBrowser(platformId);
     
-    // 🎯 ENFOQUE 1: Configurar afterNextRender en el constructor
     if (this.isBrowser) {
       afterNextRender(() => {
         this.startAnimationSequence();
@@ -61,32 +55,22 @@ export class HomeAnimation {
     }
   }
 
-  ngAfterViewInit() {
-    // 🎯 ENFOQUE 2: Alternativo usando runInInjectionContext
-    // Descomenta este bloque si prefieres usar ngAfterViewInit
-    /*
-    if (!this.isBrowser) return;
-    
-    runInInjectionContext(this.injector, () => {
-      afterNextRender(() => {
-        this.startAnimationSequence();
-      });
-    });
-    */
-  }
-
   private startAnimationSequence(): void {
-    // Fase 1: Hidratación
     requestAnimationFrame(() => {
       this.isHydrated.set(true);
       
-      // Fase 2: Mostrar animación
       setTimeout(() => {
         this.animationPhase.set('showing');
         
-        // Fase 3: Ocultar animación
         setTimeout(() => {
           this.animationPhase.set('hiding');
+          
+          // Emitir el evento cuando comience el fade-out
+          this.fadeOutStarted.emit();
+          
+          setTimeout(() => {
+            this.animationComplete.emit();
+          }, 400);
         }, 1300);
       }, 200);
     });
