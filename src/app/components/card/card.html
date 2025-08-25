@@ -1,5 +1,5 @@
 <article 
-  class="grid grid-cols-[minmax(120px,auto)_1fr] gap-4 p-4 bg-purple 
+  class="grid grid-cols-[minmax(200px,auto)_1fr] gap-4 p-4 bg-purple 
          border border-yellow shadow-[4px_4px_0_0_var(--color-yellow)]">
 
   <div class="h-full flex items-center justify-center bg-purple border border-yellow">
@@ -12,7 +12,7 @@
 
   <div class="flex flex-col gap-2">
     <h3 class="font-pixel text-yellow text-sm">{{ title() }}</h3>
-    <p class="text-white text-sm leading-relaxed">{{ description() }}</p>
+    <p class="text-white text-sm leading-relaxed font-inter">{{ description() }}</p>
     <div class="flex gap-2 flex-wrap">
       @for (t of tags(); track t) {
         <span class="font-pixel text-xs px-2 py-1 border border-orange-light text-orange-light">#{{ t }}</span>

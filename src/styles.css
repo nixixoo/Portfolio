@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import "tailwindcss";
 @plugin '@midudev/tailwind-animations';
 @import "lenis/dist/lenis.css";
@@ -15,7 +16,7 @@
     --color-orange: #F35B04;
 
     /* Fonts */
-    --font-sans: "PT Mono", system-ui, sans-serif;
+    --font-inter: "Inter", system-ui, sans-serif;
     --font-pixel: "Press Start 2P", system-ui, sans-serif;
 }
 
