@@ -1,27 +1,19 @@
-<div class="w-full h-full grid font-pixel"
-     [style.gridTemplateColumns]="'repeat(' + columns.length + ', minmax(0, 1fr))'"
-     [style.gridTemplateRows]="'repeat(' + rows.length + ', minmax(0, 1fr))'"
-     >
-
-  @for (rowIndex of rows; track rowIndex; let r = $index) {
-    @for (colIndex of columns; track colIndex; let c = $index) {
-      <div class="flex items-center justify-center">
-        <div
-          class="text-white text-2xl font-bold whitespace-nowrap"
-          [class.text-yellow]="c === centerCol() && r === centerRow() && isAnimationActive()"
-          [class.text-4xl]="c === centerCol() && r === centerRow() && isAnimationActive()"
-          [class.bg-purple]="c === centerCol() && r === centerRow() && isAnimationActive()"
-          [class.px-6]="c === centerCol() && r === centerRow() && isAnimationActive()"
-          [class.py-4]="c === centerCol() && r === centerRow() && isAnimationActive()"
-          [class.z-10]="c === centerCol() && r === centerRow() && isAnimationActive()"
-          [class.animate-fade-in-up]="shouldShowFadeIn()"
-          [class.animate-fade-out]="shouldShowFadeOut()"
-          [class.invisible]="!shouldShowText()"
-          [class.visible]="shouldShowText()"
-        >
-          Nicolás Aliaga
-        </div>
-      </div>
-    }
-  }
+<div 
+  class="fixed inset-0 z-[9999] flex items-center justify-center bg-purple transition-opacity duration-500"
+  [class.opacity-0]="!isHydrated()"
+  [class.opacity-100]="isHydrated()"
+>
+  <h1 
+    class="text-white text-4xl font-bold font-pixel transition-all duration-500"
+    [class.text-yellow]="isAnimationActive()"
+    [class.bg-purple]="isAnimationActive()"
+    [class.px-6]="isAnimationActive()"
+    [class.py-4]="isAnimationActive()"
+    [class.animate-fade-in-up]="shouldShowFadeIn()"
+    [class.animate-fade-out]="shouldShowFadeOut()"
+    [class.invisible]="!shouldShowText()"
+    [class.visible]="shouldShowText()"
+  >
+    Nicolás Aliaga
+  </h1>
 </div>

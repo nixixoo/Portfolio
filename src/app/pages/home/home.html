@@ -15,9 +15,22 @@
   <app-particles class="absolute w-full h-full inset-0 pointer-events-none"></app-particles>
 
   <section class="relative flex items-center w-full justify-center h-dvh">
-    <div class="font-pixel text-center pb-18">
+    <div class="font-pixel text-center pb-35">
         <p class="text-yellow text-xl mb-3">COMPUTER ENGINEER</p>
         <h1 class="text-4xl text-white">Nicolás Aliaga</h1>
     </div>
   </section>
+
+
+  <section class="bg-purple w-full text-white">
+    <div class="max-w-5xl mx-auto px-4 py-12">
+      <app-card
+        [title]="featured.title"
+        [imageUrl]="featured.imageUrl"
+        [description]="featured.description"
+        [link]="featured.link"
+        [tags]="featured.tags"
+        />
+      </div>
+    </section>
 </main>

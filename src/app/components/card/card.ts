@@ -1,11 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'app-card',
-  imports: [],
+  standalone: true,
   templateUrl: './card.html',
-  styleUrl: './card.css'
+  styleUrls: ['./card.css']
 })
 export class Card {
-
+  readonly title = input<string>('');
+  readonly imageUrl = input<string>('');
+  readonly description = input<string>('');
+  readonly link = input<string>('');
+  readonly tags = input<string[]>([]);
 }
