@@ -27,9 +27,10 @@ export class Home {
     this.projectsService.projects().map(project => ({
       title: project.title,
       description: project.description,
-      tags: project.technologies, // readonly string[] → Card input
-      link: project.viewUrl ?? '', // Handle undefined with nullish coalescing
-      imageUrl: project.imageUrl ?? ''
+      tags: project.technologies,
+      link: project.githubUrl ?? project.viewUrl ?? '',
+      imageUrl: project.imageUrl ?? '',
+      projectId: project.id // 🔑 CRITICAL: Enable navigation
     }))
   );
 

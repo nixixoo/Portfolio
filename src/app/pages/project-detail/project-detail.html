@@ -1,0 +1,204 @@
+<main class="bg-purple min-h-screen text-white">
+    @if (project(); as proj) {
+      <!-- Hero Section -->
+      <section class="relative py-20 border-b border-yellow/20">
+        <div class="max-w-4xl mx-auto px-4">
+          
+          <!-- Back Navigation -->
+          <button 
+            (click)="goBack()"
+            class="font-pixel text-yellow hover:text-white transition-colors mb-8 flex items-center gap-2 group"
+          >
+            <span class="transition-transform group-hover:-translate-x-1">←</span>
+            Back to Portfolio
+          </button>
+  
+          <!-- Project Header -->
+          <div class="text-center mb-12">
+            <div class="flex justify-center items-center gap-4 mb-4">
+              <h1 class="font-pixel text-yellow text-3xl">{{ proj.title }}</h1>
+              <span 
+                class="font-pixel text-xs px-3 py-1 rounded"
+                [class]="categoryStyles()"
+              >
+                {{ proj.category | titlecase }}
+              </span>
+            </div>
+            
+            <p class="font-inter text-white text-lg max-w-2xl mx-auto leading-relaxed">
+              {{ proj.description }}
+            </p>
+            
+            <!-- Status and Timeline -->
+            <div class="flex justify-center items-center gap-6 mt-6">
+              <div class="text-center">
+                <span class="font-pixel text-xs text-orange-light">STATUS</span>
+                <p class="font-inter text-white text-sm">{{ proj.status | titlecase }}</p>
+              </div>
+              <div class="w-px h-8 bg-yellow/30"></div>
+              <div class="text-center">
+                <span class="font-pixel text-xs text-orange-light">STARTED</span>
+                <p class="font-inter text-white text-sm">{{ proj.startDate }}</p>
+              </div>
+            </div>
+          </div>
+  
+          <!-- Action Buttons -->
+          <div class="flex justify-center gap-4 mb-8">
+            @if (proj.viewUrl) {
+              <a 
+                [href]="proj.viewUrl" 
+                target="_blank"
+                class="font-pixel bg-yellow text-purple px-6 py-3 hover:-translate-y-1 transition-transform flex items-center gap-2"
+              >
+                🚀 VIEW LIVE
+              </a>
+            }
+            @if (proj.githubUrl) {
+              <a 
+                [href]="proj.githubUrl" 
+                target="_blank"
+                class="font-pixel border border-yellow text-yellow px-6 py-3 hover:bg-yellow hover:text-purple transition-colors flex items-center gap-2"
+              >
+                📂 VIEW CODE
+              </a>
+            }
+          </div>
+  
+        </div>
+      </section>
+  
+      <!-- Project Details Grid -->
+      <section class="py-16">
+        <div class="max-w-6xl mx-auto px-4">
+          <div class="grid lg:grid-cols-2 gap-12">
+            
+            <!-- Left Column: Description -->
+            <div class="space-y-8">
+              <div>
+                <h2 class="font-pixel text-orange-light text-xl mb-6">About This Project</h2>
+                <p class="font-inter text-white leading-relaxed text-base">
+                  {{ proj.longDescription }}
+                </p>
+              </div>
+  
+              <!-- Key Features -->
+              <div>
+                <h3 class="font-pixel text-orange-light text-lg mb-4">Key Features</h3>
+                <div class="space-y-3">
+                  @for (feature of proj.features; track feature) {
+                    <div class="flex items-start gap-3">
+                      <span class="text-yellow font-pixel text-xs mt-1">▸</span>
+                      <p class="font-inter text-white text-sm leading-relaxed">{{ feature }}</p>
+                    </div>
+                  }
+                </div>
+              </div>
+            </div>
+  
+            <!-- Right Column: Technical Details -->
+            <div class="space-y-8">
+              
+              <!-- Technology Stack -->
+              <div>
+                <h3 class="font-pixel text-orange-light text-lg mb-4">Technology Stack</h3>
+                <div class="grid grid-cols-2 gap-2">
+                  @for (tech of proj.technologies; track tech) {
+                    <div class="font-pixel text-xs px-3 py-2 border border-orange-light text-orange-light text-center">
+                      {{ tech }}
+                    </div>
+                  }
+                </div>
+              </div>
+  
+              <!-- Development Challenges -->
+              @if (proj.challenges && proj.challenges.length > 0) {
+                <div>
+                  <h3 class="font-pixel text-orange-light text-lg mb-4">Development Challenges</h3>
+                  <div class="space-y-3">
+                    @for (challenge of proj.challenges; track challenge) {
+                      <div class="flex items-start gap-3">
+                        <span class="text-yellow font-pixel text-xs mt-1">⚡</span>
+                        <p class="font-inter text-white text-sm leading-relaxed">{{ challenge }}</p>
+                      </div>
+                    }
+                  </div>
+                </div>
+              }
+  
+              <!-- Project Metadata -->
+              <div class="p-6 border border-yellow/20 bg-purple-dark/30">
+                <h3 class="font-pixel text-orange-light text-sm mb-4">Project Details</h3>
+                <div class="space-y-2">
+                  <div class="flex justify-between">
+                    <span class="font-inter text-white/70 text-xs">Technologies:</span>
+                    <span class="font-inter text-white text-xs">{{ proj.technologies.length }}</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="font-inter text-white/70 text-xs">Category:</span>
+                    <span class="font-inter text-white text-xs">{{ proj.category | titlecase }}</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="font-inter text-white/70 text-xs">Status:</span>
+                    <span class="font-inter text-white text-xs">{{ proj.status | titlecase }}</span>
+                  </div>
+                </div>
+              </div>
+  
+            </div>
+          </div>
+        </div>
+      </section>
+  
+      <!-- Navigation Section -->
+      <section class="py-12 border-t border-yellow/20">
+        <div class="max-w-4xl mx-auto px-4">
+          <div class="flex justify-between items-center">
+            
+            @if (navigationData().prev; as prevProject) {
+              <button 
+                (click)="navigateToProject(prevProject.id)"
+                class="font-pixel text-yellow hover:text-white transition-colors flex items-center gap-2 group"
+              >
+                <span class="transition-transform group-hover:-translate-x-1">←</span>
+                <div class="text-left">
+                  <div class="text-xs text-white/70">Previous</div>
+                  <div>{{ prevProject.title }}</div>
+                </div>
+              </button>
+            } @else {
+              <div></div>
+            }
+  
+            @if (navigationData().next; as nextProject) {
+              <button 
+                (click)="navigateToProject(nextProject.id)"
+                class="font-pixel text-yellow hover:text-white transition-colors flex items-center gap-2 group text-right"
+              >
+                <div class="text-right">
+                  <div class="text-xs text-white/70">Next</div>
+                  <div>{{ nextProject.title }}</div>
+                </div>
+                <span class="transition-transform group-hover:translate-x-1">→</span>
+              </button>
+            }
+          </div>
+        </div>
+      </section>
+  
+    } @else {
+      <!-- Loading/Error State -->
+      <div class="min-h-screen flex items-center justify-center">
+        <div class="text-center">
+          <div class="font-pixel text-yellow text-2xl mb-4">404</div>
+          <p class="font-inter text-white mb-6">Project not found</p>
+          <button 
+            (click)="goBack()"
+            class="font-pixel bg-yellow text-purple px-6 py-3 hover:-translate-y-1 transition-transform"
+          >
+            Back to Portfolio
+          </button>
+        </div>
+      </div>
+    }
+  </main>
