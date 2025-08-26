@@ -23,30 +23,12 @@ export class Experience {
   // Estado local del componente usando signals
   private readonly experienceData = signal<readonly ExperienceItem[]>([
     {
-      id: 'current-role',
-      company: 'Tech Innovation Co.',
-      position: 'Senior Frontend Developer',
-      period: '2023 - Present',
-      description: 'Leading frontend development initiatives using Angular, implementing modern reactive patterns with signals, and mentoring junior developers on best practices.',
-      technologies: ['Angular', 'TypeScript', 'RxJS', 'Tailwind'],
-      companyUrl: 'https://techinnovation.com'
-    },
-    {
-      id: 'previous-role',
-      company: 'Digital Solutions Ltd.',
-      position: 'Full Stack Developer',
-      period: '2021 - 2023',
-      description: 'Developed responsive web applications, integrated RESTful APIs, and collaborated with cross-functional teams to deliver high-quality software solutions.',
-      technologies: ['Angular', 'Node.js', 'MongoDB', 'Docker'],
-      companyUrl: 'https://digitalsolutions.com'
-    },
-    {
-      id: 'junior-role',
-      company: 'StartUp Ventures',
-      position: 'Junior Developer',
-      period: '2020 - 2021',
-      description: 'Built user interfaces for web applications, learned modern development practices, and contributed to code reviews and testing processes.',
-      technologies: ['JavaScript', 'HTML', 'CSS', 'Git']
+      id: 'internship',
+      company: 'Chilevisión S.A.',
+      position: 'Professional Internship',
+      period: '2024 - 2024',
+      description: 'I developed a website using Flask to generate reports with Excel export and user profiling. I implemented a CRUD for user and permission management, using SQL Server for queries and deploying it on IIS. I also automated the process of create a daily backup on the database, plus sending a email to the responsable.',
+      technologies: ['Python', 'Flask', 'SQL Server', 'IIS']
     }
   ]);
 
@@ -69,7 +51,7 @@ export class Experience {
   // Computed para años de experiencia (ejemplo de lógica derivada)
   readonly yearsOfExperience = computed(() => {
     const currentYear = new Date().getFullYear();
-    const startYear = 2020; // Basado en los datos mock
+    const startYear = 2025; // Basado en los datos mock
     return currentYear - startYear;
   });
 }

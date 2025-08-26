@@ -39,8 +39,9 @@ export class Home {
   );
 
   readonly uniqueTechnologies = computed(() => {
-    const allTechs = this.projectsService.projects()
-      .flatMap(project => project.technologies);
+    const allTechs = ['Angular', 'Flask', 'TypeScript', 'TailwindCSS', 'Node.js', 'SQL Server', 'Firebase', 'Git', 'RESTful API'];
+    //this.projectsService.projects()
+    // .flatMap(project => project.technologies);
     return [...new Set(allTechs)]; // Remove duplicates
   });
 

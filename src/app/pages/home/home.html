@@ -71,9 +71,9 @@
       <!-- Projects Header with Dynamic Data -->
       <div class="text-center mb-12">
         <h2 class="font-pixel text-yellow text-2xl mb-4">Personal Projects</h2>
-        <p class="font-inter text-white text-lg">
+        <!-- <p class="font-inter text-white text-lg">
           {{ totalProjects() }} projects showcasing {{ techCount() }} different technologies
-        </p>
+        </p> -->
         <div class="w-16 h-1 bg-yellow mx-auto mt-4"></div>
       </div>
 
@@ -86,7 +86,7 @@
           [tags]="project.tags"
           [link]="project.link"
           [imageUrl]="project.imageUrl"
-          class="transform hover:-translate-y-2 hover:shadow-[6px_6px_0_0_var(--color-yellow)] transition-all duration-300"
+          class="transform hover:-translate-y-2 transition-all duration-300"
         />
         } @empty {
         <!-- Graceful fallback for empty state -->
@@ -100,11 +100,11 @@
       </div>
 
       <!-- Project Statistics Footer -->
-      <div class="text-center mt-12">
+      <!-- <div class="text-center mt-12">
         <p class="font-pixel text-orange-light text-sm">
           {{ totalProjects() }} completed projects • {{ techCount() }} technologies mastered
         </p>
-      </div>
+      </div> -->
     </div>
   </section>
 </main>

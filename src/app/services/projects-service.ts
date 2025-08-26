@@ -13,18 +13,25 @@ export interface ProjectData {
 export class ProjectsService {
   private readonly projectsState = signal<readonly ProjectData[]>([
     {
-      id: 'retro-portfolio',
-      title: 'Retro Portfolio',
-      description: 'A minimalist, retro-inspired portfolio built with Angular 19, SSR, and Tailwind v4.',
-      technologies: ['Angular', 'Tailwind', 'SSR'],
-      viewUrl: 'https://github.com/tu-usuario/retro-portfolio'
+      id: 'portfolio',
+      title: 'Portfolio',
+      description: 'A minimalist, pixelated portfolio.',
+      technologies: ['Angular', 'Tailwind', 'TypeScript'],
+      viewUrl: 'https://github.com/nixixoo/Portfolio'
     },
     {
-      id: 'task-manager',
-      title: 'Task Manager Pro',
-      description: 'Modern task management application with real-time updates and team collaboration.',
-      technologies: ['Angular', 'Firebase', 'RxJS'],
-      viewUrl: 'https://taskmanager.demo.com'
+      id: 'mynotex',
+      title: 'My Notex',
+      description: 'A simple note taking application with AI chat integrated.',
+      technologies: ['Angular', 'TypeScript', 'Node.js', 'Express', 'TursoSQL'],
+      viewUrl: 'https://github.com/nixixoo/Notex'
+    },
+    {
+      id: 'abysstr',
+      title: 'Abyss Team Request',
+      description: 'A platform where you can sent a team request to your favorite content creator, so he can play with that.',
+      technologies: ['Angular', 'TypeScript', 'Firebase'],
+      viewUrl: 'https://github.com/nixixoo/AbyssPage'
     }
   ]);
 
