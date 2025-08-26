@@ -1,12 +1,11 @@
 <header class="bg-purple text-white border-b-4 border-yellow sticky top-0 z-50">
     <div class="py-3 px-3 flex items-center justify-between max-w-5xl mx-auto font-pixel">
-        <a routerLink="/" class="hover:text-yellow transition-colors" >NA</a>
+        <a routerLink="/" class="hover:text-yellow transition-colors">NA</a>
         <nav class="flex gap-4">
-            <a routerLink="/" routerLinkActive="text-yellow" class="hover:text-yellow transition-colors">Home</a>
-            <a routerLink="/experience" routerLinkActive="text-yellow" class="hover:text-yellow transition-colors">Experience</a>
-            <a routerLink="/about" routerLinkActive="text-yellow" class="hover:text-yellow transition-colors">About</a>
-            <a routerLink="/projects" routerLinkActive="text-yellow" class="hover:text-yellow transition-colors">Projects</a>
+            <a (click)="scrollToSection('home')" class="hover:text-yellow transition-colors cursor-pointer">Home</a>
+            <a (click)="scrollToSection('about')" class="hover:text-yellow transition-colors cursor-pointer">About</a>
+            <a (click)="scrollToSection('experience')" class="hover:text-yellow transition-colors cursor-pointer">Experience</a>
+            <a (click)="scrollToSection('projects')" class="hover:text-yellow transition-colors cursor-pointer">Projects</a>
         </nav>
     </div>
-
 </header>
