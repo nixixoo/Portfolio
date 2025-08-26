@@ -80,14 +80,17 @@
       <!-- ✅ CRITICAL: Cards Grid Powered by ProjectsService -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         @for (project of projectCards(); track project.title) {
-        <app-card
-          [title]="project.title"
-          [description]="project.description"
-          [tags]="project.tags"
-          [link]="project.link"
-          [imageUrl]="project.imageUrl"
-          class="transform hover:-translate-y-2 transition-all duration-300"
-        />
+          <app-card
+            [title]="project.title"
+            [description]="project.description"
+            [tags]="project.tags"
+            [imageUrl]="project.imageUrl"
+            [projectId]="project.projectId"
+            [githubUrl]="project.githubUrl"
+            [liveUrl]="project.liveUrl"
+            class="transform hover:-translate-y-2 transition-all duration-300"
+          />
+        
         } @empty {
         <!-- Graceful fallback for empty state -->
         <div class="col-span-full text-center py-12">

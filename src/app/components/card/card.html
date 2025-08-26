@@ -1,47 +1,90 @@
 <article 
   class="grid grid-cols-[minmax(200px,auto)_1fr] gap-4 p-4 bg-purple 
-         border border-yellow shadow-[4px_4px_0_0_var(--color-yellow)]">
+         border border-yellow shadow-[4px_4px_0_0_var(--color-yellow)] 
+         hover:shadow-[6px_6px_0_0_var(--color-yellow)] transition-shadow duration-200">
 
   <!-- Image Section: Enhanced with better fallback -->
-  <div class="h-full flex items-center justify-center bg-purple border border-yellow">
+  <div class="h-full flex items-center justify-center bg-purple border border-yellow min-h-[120px]">
     @if (imageUrl()) {
       <img [src]="imageUrl()" [alt]="title()" class="h-full w-auto object-cover" />
     } @else {
       <div class="text-center p-4">
-        <div class="font-pixel text-yellow text-lg mb-1">📁</div>
+        <div class="font-pixel text-yellow text-lg mb-1">⚡</div>
         <span class="font-pixel text-yellow text-xs">PROJECT</span>
       </div>
     }
   </div>
 
-  <!-- Content Section: Enhanced action buttons -->
-  <div class="flex flex-col gap-2">
-    <h3 class="font-pixel text-yellow text-sm">{{ title() }}</h3>
-    <p class="text-white text-sm leading-relaxed font-inter">{{ description() }}</p>
+  <!-- Content Section: Enhanced with dual actions -->
+  <div class="flex flex-col gap-3">
     
-    <!-- Tags: Improved styling -->
+    <!-- Project Title -->
+    <h3 class="font-pixel text-yellow text-sm leading-relaxed">{{ title() }}</h3>
+    
+    <!-- Project Description -->
+    <p class="text-white text-sm leading-relaxed font-inter flex-grow">{{ description() }}</p>
+    
+    <!-- Technology Tags -->
     <div class="flex gap-2 flex-wrap">
-      @for (t of tags(); track t) {
-        <span class="font-pixel text-xs px-2 py-1 border border-orange-light text-orange-light">#{{ t }}</span>
+      @for (tech of tags(); track tech) {
+        <span class="font-pixel text-xs px-2 py-1 border border-orange-light text-orange-light 
+                     hover:bg-orange-light hover:text-purple transition-colors cursor-default">
+          #{{ tech }}
+        </span>
       }
     </div>
     
-    <!-- Action Buttons: Project navigation or external link -->
-    <div class="flex gap-2 mt-2">
-      @if (hasProjectNavigation()) {
+    <!-- Action Buttons Grid: Professional dual-action layout -->
+    <div class="grid gap-2 mt-2">
+      
+      <!-- Primary Action Row -->
+      @if (buttonConfig().showDetails) {
         <button 
           (click)="navigateToProject()"
-          class="font-pixel px-3 py-2 bg-yellow text-purple hover:-translate-y-0.5 transition-transform"
+          class="font-pixel px-4 py-2 bg-yellow text-purple 
+                 hover:-translate-y-0.5 hover:shadow-[2px_2px_0_0_var(--color-purple-dark)]
+                 transition-all duration-200 flex items-center justify-center gap-2"
+          aria-label="View project details"
         >
-          DETAILS
+          <span>📋</span>
+          <span>DETAILS</span>
         </button>
-      } 
+      }
       
-      @if (link()) {
-        <a [href]="link()" target="_blank" rel="noopener" 
-           class="font-pixel px-3 py-2 border border-yellow text-yellow hover:bg-yellow hover:text-purple transition-colors">
-          VIEW CODE
-        </a>
+      <!-- Secondary Actions Row -->
+      <div class="grid grid-cols-2 gap-2">
+        @if (buttonConfig().showGithub) {
+          <button 
+            (click)="openGitHub()"
+            class="font-pixel px-3 py-2 border border-yellow text-yellow 
+                   hover:bg-yellow hover:text-purple transition-colors
+                   flex items-center justify-center gap-1 text-xs"
+            aria-label="View source code on GitHub"
+          >
+            <span>📂</span>
+            <span>CODE</span>
+          </button>
+        }
+        
+        @if (buttonConfig().showLive) {
+          <button 
+            (click)="openLiveDemo()"
+            class="font-pixel px-3 py-2 border border-orange-light text-orange-light 
+                   hover:bg-orange-light hover:text-purple transition-colors
+                   flex items-center justify-center gap-1 text-xs"
+            aria-label="View live demo"
+          >
+            <span>🚀</span>
+            <span>LIVE</span>
+          </button>
+        }
+      </div>
+      
+      <!-- Fallback: No actions available -->
+      @if (!buttonConfig().showDetails && !buttonConfig().showGithub && !buttonConfig().showLive) {
+        <div class="font-pixel text-xs text-white/50 text-center py-2 border border-white/20">
+          Coming Soon
+        </div>
       }
     </div>
   </div>

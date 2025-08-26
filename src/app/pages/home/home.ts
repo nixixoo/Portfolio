@@ -28,9 +28,10 @@ export class Home {
       title: project.title,
       description: project.description,
       tags: project.technologies,
-      link: project.githubUrl ?? project.viewUrl ?? '',
       imageUrl: project.imageUrl ?? '',
-      projectId: project.id // 🔑 CRITICAL: Enable navigation
+      projectId: project.id,
+      githubUrl: project.githubUrl ?? '', // 🔑 NEW: GitHub URL
+      liveUrl: project.viewUrl ?? ''      // 🔑 NEW: Live demo URL
     }))
   );
 
