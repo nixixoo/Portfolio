@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-project-detail',
   standalone: true,
-  imports: [RouterLink, CommonModule],
+  imports: [CommonModule],
   templateUrl: './project-detail.html',
   styleUrl: './project-detail.css',
   changeDetection: ChangeDetectionStrategy.OnPush

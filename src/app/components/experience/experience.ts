@@ -38,7 +38,6 @@ export class Experience {
       title: `${exp.position} at ${exp.company}`,
       description: `${exp.period} - ${exp.description}`,
       tags: exp.technologies, // ✅ Ya es readonly string[]
-      link: exp.companyUrl ?? '', // ✅ Usar nullish coalescing
       imageUrl: '' // Sin imagen para experiencia
     }))
   );

@@ -41,7 +41,7 @@ export class Home {
   );
 
   readonly uniqueTechnologies = computed(() => {
-    const allTechs = ['Angular', 'Flask', 'TypeScript', 'TailwindCSS', 'Node.js', 'SQL Server', 'Firebase', 'Git', 'RESTful API'];
+    const allTechs = ['Angular', 'Flask', 'TypeScript', 'TailwindCSS', 'Node.js', 'Express', 'SQL Server', 'Firebase', 'Git', 'RESTful API'];
     //this.projectsService.projects()
     // .flatMap(project => project.technologies);
     return [...new Set(allTechs)]; // Remove duplicates
@@ -51,15 +51,6 @@ export class Home {
     this.uniqueTechnologies().length
   );
 
-  // Featured project data (existing code)
-  readonly featured = {
-    title: 'Retro Portfolio',
-    imageUrl: '',
-    description: 'A minimalist, retro-inspired portfolio built with Angular 19, SSR, and Tailwind v4.',
-    link: '#',
-    tags: ['Angular', 'Tailwind', 'SSR'] as const
-  };
-  
   // Animation computed properties (existing code)
   readonly showEntryAnimation = computed(() => 
     !this.animationCompleted()

@@ -35,7 +35,6 @@
     </div>
     
     <!-- Action Buttons Grid: Professional dual-action layout -->
-    <div class="grid gap-2 mt-2">
       
       <!-- Primary Action Row -->
       @if (buttonConfig().showDetails) {
@@ -80,12 +79,6 @@
         }
       </div>
       
-      <!-- Fallback: No actions available -->
-      @if (!buttonConfig().showDetails && !buttonConfig().showGithub && !buttonConfig().showLive) {
-        <div class="font-pixel text-xs text-white/50 text-center py-2 border border-white/20">
-          Coming Soon
-        </div>
-      }
-    </div>
+
   </div>
 </article>

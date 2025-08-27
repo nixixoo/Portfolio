@@ -27,7 +27,7 @@ export class ProjectsService {
         web development. Built with Angular 19's cutting-edge features including signals, zoneless 
         change detection, and SSR capabilities. The design embraces a retro-pixelated aesthetic 
         while maintaining professional functionality and performance optimization.`,
-      technologies: ['Angular', 'Tailwind', 'TypeScript', 'SSR', 'Lenis'],
+      technologies: ['Angular', 'Tailwind', 'TypeScript'],
       viewUrl: 'https://github.com/nixixoo/Portfolio',
       githubUrl: 'https://github.com/nixixoo/Portfolio',
       status: 'completed',
@@ -57,8 +57,8 @@ export class ProjectsService {
         Angular for the frontend, Node.js/Express for the backend, and TursoSQL for efficient 
         data management. The integrated AI chat helps users organize, summarize, and expand 
         their notes intelligently.`,
-      technologies: ['Angular', 'TypeScript', 'Node.js', 'Express', 'TursoSQL', 'AI Integration'],
-      viewUrl: 'https://github.com/nixixoo/Notex',
+      technologies: ['Angular', 'TypeScript', 'Node.js', 'Express', 'TursoSQL'],
+      viewUrl: 'https://mynotex.vercel.app',
       githubUrl: 'https://github.com/nixixoo/Notex',
       status: 'completed',
       startDate: '2024-08',
@@ -87,8 +87,8 @@ export class ProjectsService {
         and coordinate collaborative content creation. Built with Angular and Firebase, it provides 
         real-time communication, user authentication, and scalable data management for growing 
         gaming communities.`,
-      technologies: ['Angular', 'TypeScript', 'Firebase', 'Real-time Database', 'Authentication'],
-      viewUrl: 'https://github.com/nixixoo/AbyssPage',
+      technologies: ['Angular', 'TypeScript', 'Firebase'],
+      viewUrl: 'https://abyssteamrequest.vercel.app',
       githubUrl: 'https://github.com/nixixoo/AbyssPage',
       status: 'completed',
       startDate: '2024-06',
