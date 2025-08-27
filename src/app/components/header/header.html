@@ -1,11 +1,50 @@
 <header class="bg-purple text-white border-b-4 border-yellow sticky top-0 z-50">
-    <div class="py-3 px-3 flex items-center justify-between max-w-5xl mx-auto font-pixel">
-        <a routerLink="/" class="hover:text-yellow transition-colors">NA</a>
-        <nav class="flex gap-4">
-            <a (click)="scrollToSection('home')" class="hover:text-yellow transition-colors cursor-pointer">Home</a>
-            <a (click)="scrollToSection('about')" class="hover:text-yellow transition-colors cursor-pointer">About</a>
-            <a (click)="scrollToSection('experience')" class="hover:text-yellow transition-colors cursor-pointer">Experience</a>
-            <a (click)="scrollToSection('projects')" class="hover:text-yellow transition-colors cursor-pointer">Projects</a>
+    <div class="py-2 sm:py-3 px-3 sm:px-4 flex items-center justify-between max-w-5xl mx-auto font-pixel">
+        <!-- Logo/Brand -->
+        <a routerLink="/" class="hover:text-yellow transition-colors text-lg sm:text-base">NA</a>
+        
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex gap-3 lg:gap-4">
+            <a (click)="scrollToSection('home')" class="hover:text-yellow transition-colors cursor-pointer text-sm lg:text-base">Home</a>
+            <a (click)="scrollToSection('about')" class="hover:text-yellow transition-colors cursor-pointer text-sm lg:text-base">About</a>
+            <a (click)="scrollToSection('experience')" class="hover:text-yellow transition-colors cursor-pointer text-sm lg:text-base">Experience</a>
+            <a (click)="scrollToSection('projects')" class="hover:text-yellow transition-colors cursor-pointer text-sm lg:text-base">Projects</a>
         </nav>
+
+        <!-- Mobile Menu Button -->
+        <button 
+            class="md:hidden font-pixel text-xl p-2 hover:text-yellow transition-colors"
+            (click)="toggleMobileMenu()"
+            [class.text-yellow]="isMobileMenuOpen()"
+            aria-label="Toggle mobile menu"
+        >
+            {{ isMobileMenuOpen() ? '-' : '+' }}
+        </button>
     </div>
+
+    <!-- Mobile Navigation Dropdown -->
+    <nav class="md:hidden border-t border-yellow/20 bg-purple-dark/90 backdrop-blur-sm overflow-hidden transition-all duration-300 ease-in-out"
+         [class.max-h-0]="!isMobileMenuOpen()"
+         [class.max-h-60]="isMobileMenuOpen()"
+         [class.opacity-0]="!isMobileMenuOpen()"
+         [class.opacity-100]="isMobileMenuOpen()">
+        <div class="py-3 px-6 space-y-2 font-pixel">
+            <a (click)="scrollToSection('home'); closeMobileMenu()" 
+               class="block hover:text-yellow transition-colors cursor-pointer text-sm py-2 border-b border-transparent hover:border-yellow/30">
+                Home
+            </a>
+            <a (click)="scrollToSection('about'); closeMobileMenu()" 
+               class="block hover:text-yellow transition-colors cursor-pointer text-sm py-2 border-b border-transparent hover:border-yellow/30">
+                About
+            </a>
+            <a (click)="scrollToSection('experience'); closeMobileMenu()" 
+               class="block hover:text-yellow transition-colors cursor-pointer text-sm py-2 border-b border-transparent hover:border-yellow/30">
+                Experience
+            </a>
+            <a (click)="scrollToSection('projects'); closeMobileMenu()" 
+               class="block hover:text-yellow transition-colors cursor-pointer text-sm py-2 border-b border-transparent hover:border-yellow/30">
+                Projects
+            </a>
+        </div>
+    </nav>
 </header>

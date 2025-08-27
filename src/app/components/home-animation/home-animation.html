@@ -1,14 +1,16 @@
 <div 
-  class="fixed inset-0 z-[9999] flex items-center justify-center bg-purple transition-opacity duration-500"
+  class="fixed inset-0 z-[9999] flex items-center justify-center bg-purple transition-opacity duration-500 px-4 sm:px-0"
   [class.opacity-0]="!isHydrated()"
   [class.opacity-100]="isHydrated()"
 >
   <h1 
-    class="text-white text-4xl font-bold font-pixel transition-all duration-500"
+    class="text-white text-2xl sm:text-3xl md:text-4xl font-bold font-pixel transition-all duration-500 text-center max-w-sm sm:max-w-none"
     [class.text-yellow]="isAnimationActive()"
     [class.bg-purple]="isAnimationActive()"
-    [class.px-6]="isAnimationActive()"
-    [class.py-4]="isAnimationActive()"
+    [class.px-4]="isAnimationActive()"
+    [class.sm:px-6]="isAnimationActive()"
+    [class.py-3]="isAnimationActive()"
+    [class.sm:py-4]="isAnimationActive()"
     [class.animate-fade-in-up]="shouldShowFadeIn()"
     [class.animate-fade-out]="shouldShowFadeOut()"
     [class.invisible]="!shouldShowText()"

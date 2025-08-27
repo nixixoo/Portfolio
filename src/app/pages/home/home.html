@@ -1,143 +1,117 @@
 @if (showEntryAnimation()) {
-<div
-  class="fixed inset-0 bg-purple flex items-center justify-center overflow-hidden z-50 transition-opacity duration-800"
-  [class.opacity-0]="isAnimationFadingOut()"
-  [class.opacity-100]="!isAnimationFadingOut()"
->
-  <app-home-animation
-    (animationComplete)="onEntryAnimationComplete()"
-    (fadeOutStarted)="onAnimationFadeOutStarted()"
-  />
-</div>
-}
-
-<main class="bg-purple w-full min-h-dvh">
-  <app-particles class="absolute w-full h-full inset-0 pointer-events-none"></app-particles>
-
-  <!-- Hero Section -->
-  <section id="home" class="relative flex items-center w-full justify-center h-dvh">
-    <div class="font-pixel text-center pb-18">
-      <p class="text-yellow text-xl mb-3">Nicolás Aliaga</p>
-      <h1 class="text-4xl text-white">Computer Engineer</h1>
-      <div class="mt-6 bg-yellow text-purple font-pixel px-6 py-3 rounded-full">
-        <p href="mailto:nico.aliaga02@gmail.com" class="hover:underline">
-          nico.aliaga02@gmail.com
-        </p>
+  <div
+    class="fixed inset-0 bg-purple flex items-center justify-center overflow-hidden z-50 transition-opacity duration-800"
+    [class.opacity-0]="isAnimationFadingOut()"
+    [class.opacity-100]="!isAnimationFadingOut()"
+  >
+    <app-home-animation
+      (animationComplete)="onEntryAnimationComplete()"
+      (fadeOutStarted)="onAnimationFadeOutStarted()"
+    />
+  </div>
+  }
+  
+  <main class="bg-purple w-full min-h-dvh">
+    <app-particles class="absolute w-full h-full inset-0 pointer-events-none"></app-particles>
+  
+    <!-- Hero Section -->
+    <section id="home" class="relative flex items-center w-full justify-center h-dvh">
+      <div class="font-pixel text-center pb-18">
+        <p class="text-yellow text-xl mb-3">Nicolás Aliaga</p>
+        <h1 class="text-4xl text-white">Computer Engineer</h1>
+        <div class="mt-6 bg-yellow text-purple font-pixel px-6 py-3 rounded-full">
+          <p href="mailto:nico.aliaga02@gmail.com" class="hover:underline text-xs sm:text-sm md:text-base">
+            nico.aliaga02@gmail.com
+          </p>
+        </div>
       </div>
-    </div>
-    
-  </section>
-
-  <!-- About Me Section -->
-  <section id="about" class="bg-purple w-full text-white py-16">
-    <div class="max-w-4xl mx-auto px-4">
-      <!-- Section Header -->
-      <div class="text-center mb-12">
-        <h2 class="font-pixel text-yellow text-2xl mb-4">About Me</h2>
-        <div class="w-16 h-1 bg-yellow mx-auto"></div>
-      </div>
-
-      <!-- Personal Introduction -->
-      <div class="space-y-6 text-center max-w-3xl mx-auto">
-        <p class="font-inter text-white text-lg leading-relaxed">
-          Hello! I can use AI to code, but no for my own About Me. I'm Nicolás Aliaga, a <span class="text-orange-light font-medium">Computer Engineer</span>
-          who wants to create and serve to help the people reach their objectives, mainly focused on bring efficient solutions, as for my the most
-          valuable thing is to save time to the users.
-        </p>
-
-        <p class="font-inter text-white/90 text-base leading-relaxed">
-          I'm heavily focused on web development with <span class="text-orange-light font-medium">Angular</span>, working on create code scalable and maintainable.
-          My objective is to create safe, fast and responsive web applications to reach the goals of the business.
-        </p>
-
-        <!-- Skills Highlight -->
-        <!-- Technology Stack Display -->
-        <div class="mt-16 pt-8 border-yellow/20">
-          <h3 class="font-pixel text-orange-light text-lg mb-6 text-center">Technology Stack</h3>
-          <div class="flex flex-wrap justify-center gap-3">
-            @for (tech of uniqueTechnologies(); track tech) {
-            <span
-              class="font-pixel text-xs px-3 py-2 border border-orange-light text-orange-light hover:bg-orange-light hover:text-purple transition-colors cursor-default"
-            >
-              {{ tech }}
-            </span>
-            }
+      
+    </section>
+  
+    <!-- About Me Section -->
+    <section id="about" class="bg-purple w-full text-white py-16">
+      <div class="max-w-4xl mx-auto px-4">
+        <!-- Section Header -->
+        <div class="text-center mb-12">
+          <h2 class="font-pixel text-yellow text-2xl mb-4">About Me</h2>
+          <div class="w-16 h-1 bg-yellow mx-auto"></div>
+        </div>
+  
+        <!-- Personal Introduction -->
+        <div class="space-y-6 text-center max-w-3xl mx-auto">
+          <p class="font-inter text-white text-lg leading-relaxed">
+            Hello! I can use AI to code, but no for my own About Me. I'm Nicolás Aliaga, a <span class="text-orange-light font-medium">Computer Engineer</span>
+            who wants to create and serve to help the people reach their objectives, mainly focused on bring efficient solutions, as for my the most
+            valuable thing is to save time to the users.
+          </p>
+  
+          <p class="font-inter text-white/90 text-base leading-relaxed">
+            I'm heavily focused on web development with <span class="text-orange-light font-medium">Angular</span>, working on create code scalable and maintainable.
+            My objective is to create safe, fast and responsive web applications to reach the goals of the business.
+          </p>
+  
+          <!-- Technology Stack Display - SECURITY-COMPLIANT VERSION -->
+          <div class="mt-16 pt-8 border-yellow/20">
+            <h3 class="font-pixel text-orange-light text-lg mb-6 text-center">Technology Stack</h3>
+            <div class="flex flex-wrap justify-center gap-3">
+              <!-- 🔒 SECURITY-FIRST: Sanitized SVG Rendering -->
+              @for (tech of uniqueTechnologies(); track tech.name) {
+                <div class="font-pixel text-xs px-3 py-2 border border-orange-light text-orange-light 
+                           hover:bg-orange-light hover:text-purple transition-colors cursor-default
+                           flex items-center gap-2">
+                  <!-- 
+                    🎯 CRITICAL SECURITY PATTERN:
+                    - sanitizedIcon is SafeHtml, not raw string
+                    - DomSanitizer has validated the content
+                    - No XSS warnings, full security compliance
+                  -->
+                  <span [innerHTML]="tech.sanitizedIcon" class="flex-shrink-0"></span>
+                  <!-- Text content remains interpolated for safety -->
+                  <span>{{ tech.name }}</span>
+                </div>
+              }
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Experience Section -->
-  <app-experience id="experience"></app-experience>
-
-  <!-- 🎯 PROJECTS SECTION: Complete Integration with Service -->
-  <section id="projects" class="bg-purple w-full text-white py-16">
-    <div class="max-w-5xl mx-auto px-4">
-      <!-- Projects Header with Dynamic Data -->
-      <div class="text-center mb-12">
-        <h2 class="font-pixel text-yellow text-2xl mb-4">Personal Projects</h2>
-        <!-- <p class="font-inter text-white text-lg">
-          {{ totalProjects() }} projects showcasing {{ techCount() }} different technologies
-        </p> -->
-        <div class="w-16 h-1 bg-yellow mx-auto mt-4"></div>
-      </div>
-
-      <!-- ✅ CRITICAL: Cards Grid Powered by ProjectsService -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        @for (project of projectCards(); track project.title) {
-          <app-card
-            [title]="project.title"
-            [description]="project.description"
-            [tags]="project.tags"
-            [imageUrl]="project.imageUrl"
-            [projectId]="project.projectId"
-            [githubUrl]="project.githubUrl"
-            [liveUrl]="project.liveUrl"
-            class="transform hover:-translate-y-2 transition-all duration-300"
-          />
-        
-        } @empty {
-        <!-- Graceful fallback for empty state -->
-        <div class="col-span-full text-center py-12">
-          <div class="border-2 border-yellow/30 border-dashed p-8">
-            <p class="font-pixel text-yellow text-sm mb-2">No projects available</p>
-            <p class="font-inter text-white/70 text-xs">Projects will appear here when loaded</p>
-          </div>
+    </section>
+  
+    <!-- Experience Section -->
+    <app-experience id="experience"></app-experience>
+  
+    <!-- 🎯 PROJECTS SECTION: Complete Integration with Service -->
+    <section id="projects" class="bg-purple w-full text-white py-16">
+      <div class="max-w-5xl mx-auto px-4">
+        <!-- Projects Header with Dynamic Data -->
+        <div class="text-center mb-12">
+          <h2 class="font-pixel text-yellow text-2xl mb-4">Personal Projects</h2>
+          <div class="w-16 h-1 bg-yellow mx-auto mt-4"></div>
         </div>
-        }
+  
+        <!-- ✅ CRITICAL: Cards Grid Powered by ProjectsService -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          @for (project of projectCards(); track project.title) {
+            <app-card
+              [title]="project.title"
+              [description]="project.description"
+              [tags]="project.tags"
+              [imageUrl]="project.imageUrl"
+              [projectId]="project.projectId"
+              [githubUrl]="project.githubUrl"
+              [liveUrl]="project.liveUrl"
+              class="transform hover:-translate-y-2 transition-all duration-300"
+            />
+          
+          } @empty {
+          <!-- Graceful fallback for empty state -->
+          <div class="col-span-full text-center py-12">
+            <div class="border-2 border-yellow/30 border-dashed p-8">
+              <p class="font-pixel text-yellow text-sm mb-2">No projects available</p>
+              <p class="font-inter text-white/70 text-xs">Projects will appear here when loaded</p>
+            </div>
+          </div>
+          }
+        </div>
       </div>
-
-      <!-- Project Statistics Footer -->
-      <!-- <div class="text-center mt-12">
-        <p class="font-pixel text-orange-light text-sm">
-          {{ totalProjects() }} completed projects • {{ techCount() }} technologies mastered
-        </p>
-      </div> -->
-    </div>
-  </section>
-</main>
-
-<!-- 
-🎓 TEMPLATE ARCHITECTURE ANALYSIS:
-
-✅ MODERN ANGULAR PATTERNS:
-- @for/@if control flow (Angular 17+)
-- Signal integration with computed values
-- Track functions for optimal reconciliation
-
-✅ REACTIVE DATA BINDING:
-- projectCards() automatically updates when service changes
-- totalProjects() and techCount() are computed derivatives
-- No manual subscriptions or memory leaks
-
-✅ PROGRESSIVE ENHANCEMENT:
-- @empty blocks provide graceful fallbacks
-- Conditional rendering handles edge cases
-- Accessibility-friendly semantic structure
-
-✅ PERFORMANCE OPTIMIZATIONS:
-- track functions enable efficient DOM updates
-- OnPush detection strategy reduces change cycles  
-- Computed values are memoized automatically
--->
+    </section>
+  </main>

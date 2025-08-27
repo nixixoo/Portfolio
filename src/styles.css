@@ -5,7 +5,6 @@
 @plugin '@midudev/tailwind-animations';
 @import "lenis/dist/lenis.css";
 
-
 @theme {
     /* Colors */
     --color-purple-dark: #332b7f;
@@ -20,11 +19,19 @@
     --font-pixel: "Press Start 2P", system-ui, sans-serif;
 }
 
+
+html, body {
+  overflow-x: hidden;
+}
+
+/* Prevenir desbordamiento horizontal */
 /* Ocultar scrollbar nativo (en navegadores comunes) */
 html {
   scrollbar-width: none; /* Firefox */
 }
+
 html::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Edge */
 }
+
 

@@ -1,33 +1,33 @@
 <article 
-  class="grid grid-cols-[minmax(200px,auto)_1fr] gap-4 p-4 bg-purple 
+  class="grid grid-cols-1 sm:grid-cols-[minmax(120px,200px)_1fr] md:grid-cols-[minmax(200px,auto)_1fr] gap-3 sm:gap-4 p-3 sm:p-4 bg-purple 
          border border-yellow shadow-[4px_4px_0_0_var(--color-yellow)] 
          hover:shadow-[6px_6px_0_0_var(--color-yellow)] transition-shadow duration-200">
 
   <!-- Image Section: Enhanced with better fallback -->
-  <div class="h-full flex items-center justify-center bg-purple border border-yellow min-h-[120px]">
+  <div class="h-24 sm:h-full flex items-center justify-center bg-purple border border-yellow min-h-[80px] sm:min-h-[120px] order-1 sm:order-none">
     @if (imageUrl()) {
       <img [src]="imageUrl()" [alt]="title()" class="h-full w-auto object-cover" />
     } @else {
-      <div class="text-center p-4">
-        <div class="font-pixel text-yellow text-lg mb-1">⚡</div>
+      <div class="text-center p-2 sm:p-4">
+        <div class="font-pixel text-yellow text-base sm:text-lg mb-1">⚡</div>
         <span class="font-pixel text-yellow text-xs">PROJECT</span>
       </div>
     }
   </div>
 
   <!-- Content Section: Enhanced with dual actions -->
-  <div class="flex flex-col gap-3">
+  <div class="flex flex-col gap-2 sm:gap-3 order-2 sm:order-none">
     
     <!-- Project Title -->
-    <h3 class="font-pixel text-yellow text-sm leading-relaxed">{{ title() }}</h3>
+    <h3 class="font-pixel text-yellow text-sm sm:text-sm leading-relaxed">{{ title() }}</h3>
     
     <!-- Project Description -->
-    <p class="text-white text-sm leading-relaxed font-inter flex-grow">{{ description() }}</p>
+    <p class="text-white text-xs sm:text-sm leading-relaxed font-inter flex-grow">{{ description() }}</p>
     
     <!-- Technology Tags -->
-    <div class="flex gap-2 flex-wrap">
+    <div class="flex gap-1 sm:gap-2 flex-wrap">
       @for (tech of tags(); track tech) {
-        <span class="font-pixel text-xs px-2 py-1 border border-orange-light text-orange-light 
+        <span class="font-pixel text-xs px-1.5 sm:px-2 py-1 border border-orange-light text-orange-light 
                      hover:bg-orange-light hover:text-purple transition-colors cursor-default">
           #{{ tech }}
         </span>
@@ -40,9 +40,9 @@
       @if (buttonConfig().showDetails) {
         <button 
           (click)="navigateToProject()"
-          class="font-pixel px-4 py-2 bg-yellow text-purple 
+          class="font-pixel px-3 sm:px-4 py-2 bg-yellow text-purple 
                  hover:-translate-y-0.5 hover:shadow-[2px_2px_0_0_var(--color-purple-dark)]
-                 transition-all duration-200 flex items-center justify-center gap-2"
+                 transition-all duration-200 flex items-center justify-center gap-1 sm:gap-2 text-xs sm:text-sm"
           aria-label="View project details"
         >
           <span>📋</span>
@@ -51,30 +51,32 @@
       }
       
       <!-- Secondary Actions Row -->
-      <div class="grid grid-cols-2 gap-2">
+      <div class="grid grid-cols-2 gap-1.5 sm:gap-2">
         @if (buttonConfig().showGithub) {
           <button 
             (click)="openGitHub()"
-            class="font-pixel px-3 py-2 border border-yellow text-yellow 
+            class="font-pixel px-2 sm:px-3 py-2 border border-yellow text-yellow 
                    hover:bg-yellow hover:text-purple transition-colors
                    flex items-center justify-center gap-1 text-xs"
             aria-label="View source code on GitHub"
           >
             <span>📂</span>
-            <span>CODE</span>
+            <span class="hidden xs:inline sm:inline">CODE</span>
+            <span class="xs:hidden sm:hidden">CODE</span>
           </button>
         }
         
         @if (buttonConfig().showLive) {
           <button 
             (click)="openLiveDemo()"
-            class="font-pixel px-3 py-2 border border-orange-light text-orange-light 
+            class="font-pixel px-2 sm:px-3 py-2 border border-orange-light text-orange-light 
                    hover:bg-orange-light hover:text-purple transition-colors
                    flex items-center justify-center gap-1 text-xs"
             aria-label="View live demo"
           >
             <span>🚀</span>
-            <span>LIVE</span>
+            <span class="hidden xs:inline sm:inline">LIVE</span>
+            <span class="xs:hidden sm:hidden">LIVE</span>
           </button>
         }
       </div>

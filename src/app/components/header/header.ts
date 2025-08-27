@@ -1,4 +1,4 @@
-import { Component, Inject, PLATFORM_ID, inject } from '@angular/core';
+import { Component, Inject, PLATFORM_ID, inject, signal } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { LenisService } from '../../services/lenis-service';
 
@@ -14,6 +14,17 @@ export class Header {
   private readonly lenisService = inject(LenisService);
   
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  private mobileMenuOpen = signal(false);
+
+  isMobileMenuOpen = this.mobileMenuOpen.asReadonly();
+  
+  toggleMobileMenu(): void {
+    this.mobileMenuOpen.update(isOpen => !isOpen);
+  }
+  
+  closeMobileMenu(): void {
+    this.mobileMenuOpen.set(false);
+  }
 
   /**
    * 🎯 PROFESSIONAL SMOOTH SCROLL WITH LENIS INTEGRATION
