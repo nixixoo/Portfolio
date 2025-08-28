@@ -2,6 +2,7 @@ import { Component, ChangeDetectionStrategy, signal, computed, inject } from '@a
 import { Card } from '../card/card';
 import { TranslationService } from '../../services/translation-service';
 
+// Experience item data structure
 interface ExperienceItem {
   readonly id: string;
   readonly company: string;
@@ -12,6 +13,7 @@ interface ExperienceItem {
   readonly companyUrl?: string;
 }
 
+// Experience component that displays professional experience using cards
 @Component({
   selector: 'app-experience',
   standalone: true,
@@ -21,9 +23,9 @@ interface ExperienceItem {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Experience {
-  private readonly translationService = inject(TranslationService);
+  private readonly translationService = inject(TranslationService); // Translation service
   
-  // Estado local del componente usando signals
+  // Experience data stored in signal for reactivity
   private readonly experienceData = signal<readonly ExperienceItem[]>([
     {
       id: 'internship',
@@ -35,28 +37,29 @@ export class Experience {
     }
   ]);
 
-  // ✅ Computed optimizado con transformaciones inmutables con traducciones
+  // Transform experience data for card display with translations
   readonly experiences = computed(() => 
     this.experienceData().map(exp => ({
       title: `${this.translate('experience.position')} at ${this.translate('experience.company')}`,
       description: `${this.translate('experience.period')} - ${this.translate('experience.description')}`,
-      tags: exp.technologies, // ✅ Ya es readonly string[]
-      imageUrl: '' // Sin imagen para experiencia
+      tags: exp.technologies,
+      imageUrl: ''
     }))
   );
 
-  // Computed para contar experiencias
+  // Get total number of experiences
   readonly totalExperiences = computed(() => 
     this.experienceData().length
   );
 
-  // Computed para años de experiencia (ejemplo de lógica derivada)
+  // Calculate years of experience based on start year
   readonly yearsOfExperience = computed(() => {
     const currentYear = new Date().getFullYear();
-    const startYear = 2025; // Basado en los datos mock
+    const startYear = 2025;
     return currentYear - startYear;
   });
 
+  // Get translated text for given key
   translate(key: string): string {
     return this.translationService.translate(key);
   }

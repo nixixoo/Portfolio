@@ -4,6 +4,7 @@ import { LenisService } from '../../services/lenis-service';
 import { LanguageService } from '../../services/language-service';
 import { TranslationService } from '../../services/translation-service';
 
+// Header component with navigation and language switching
 @Component({
   selector: 'app-header',
   imports: [],
@@ -12,42 +13,37 @@ import { TranslationService } from '../../services/translation-service';
 })
 export class Header {
   
-  // Modern inject() pattern for dependency injection
-  private readonly lenisService = inject(LenisService);
-  private readonly languageService = inject(LanguageService);
-  private readonly translationService = inject(TranslationService);
+  private readonly lenisService = inject(LenisService); // Smooth scroll service
+  private readonly languageService = inject(LanguageService); // Language management
+  private readonly translationService = inject(TranslationService); // Translation service
   
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
-  private mobileMenuOpen = signal(false);
+  private mobileMenuOpen = signal(false); // Mobile menu state
 
-  isMobileMenuOpen = this.mobileMenuOpen.asReadonly();
-  currentLanguage = this.languageService.currentLanguage;
+  isMobileMenuOpen = this.mobileMenuOpen.asReadonly(); // Read-only mobile menu state
+  currentLanguage = this.languageService.currentLanguage; // Current language signal
   
+  // Toggle mobile menu open/close state
   toggleMobileMenu(): void {
     this.mobileMenuOpen.update(isOpen => !isOpen);
   }
   
+  // Close mobile menu
   closeMobileMenu(): void {
     this.mobileMenuOpen.set(false);
   }
 
+  // Switch between available languages
   toggleLanguage(): void {
     this.languageService.toggleLanguage();
   }
 
+  // Get translated text for given key
   translate(key: string): string {
     return this.translationService.translate(key);
   }
 
-  /**
-   * 🎯 PROFESSIONAL SMOOTH SCROLL WITH LENIS INTEGRATION
-   * 
-   * Teaching Points:
-   * - Lenis provides superior easing algorithms
-   * - Consistent performance across all browsers
-   * - Customizable duration and easing curves
-   * - Fallback strategy ensures reliability
-   */
+  // Smooth scroll to section with Lenis integration
   scrollToSection(sectionId: string): void {
     if (!isPlatformBrowser(this.platformId)) return;
     
@@ -60,26 +56,20 @@ export class Header {
     const lenis = this.lenisService.getLenis();
     
     if (lenis) {
-      // Professional smooth scroll with Lenis
-      // Calculate precise position with header offset
       const headerHeight = 80;
       const targetPosition = element.offsetTop - headerHeight;
       
       lenis.scrollTo(targetPosition, {
-        duration: 1.5,        // Smooth 1.5s animation
-        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Custom easing
-        immediate: false      // Always animate
+        duration: 1.5,
+        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        immediate: false
       });
     } else {
-      // Fallback: Enhanced native smooth scroll
       this.fallbackSmoothScroll(element);
     }
   }
 
-  /**
-   * 📚 FALLBACK IMPLEMENTATION
-   * Ensures functionality even if Lenis fails to initialize
-   */
+  // Fallback smooth scroll when Lenis is not available
   private fallbackSmoothScroll(element: HTMLElement): void {
     document.documentElement.style.scrollBehavior = 'smooth';
     
@@ -91,7 +81,6 @@ export class Header {
       behavior: 'smooth'
     });
     
-    // Cleanup CSS modification
     setTimeout(() => {
       document.documentElement.style.scrollBehavior = 'auto';
     }, 1000);

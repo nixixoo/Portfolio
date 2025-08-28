@@ -1,10 +1,12 @@
+<!-- Project detail page with animations -->
 <main class="bg-purple min-h-screen text-white animate-fade-in animate-duration-700">
+    <!-- Main project content -->
     @if (project(); as proj) {
-      <!-- Hero Section -->
+      <!-- Project header section -->
       <section class="relative pt-20 animate-slide-in-top animate-delay-300">
         <div class="max-w-4xl mx-auto px-4">
           
-          <!-- Back Navigation -->
+          <!-- Back to portfolio button -->
           <button 
             (click)="goBack()"
             class="font-pixel text-yellow hover:text-white transition-colors mb-8 flex items-center gap-2"
@@ -13,7 +15,7 @@
             {{ translate('project.detail.backToPortfolio') }}
           </button>
   
-          <!-- Project Header -->
+          <!-- Project title and metadata -->
           <div class="text-center mb-12">
             <div class="flex justify-center items-center gap-4 mb-4">
               <h1 class="font-pixel text-yellow text-3xl">{{ proj.title }}</h1>
@@ -23,7 +25,6 @@
               {{ proj.description }}
             </p>
             
-            <!-- Status and Timeline -->
             <div class="flex justify-center items-center gap-6 mt-6">
               <div class="text-center">
                 <span class="font-pixel text-xs text-orange-light">{{ translate('project.detail.status') }}</span>
@@ -37,7 +38,7 @@
             </div>
           </div>
   
-          <!-- Action Buttons -->
+          <!-- Live demo and code buttons -->
           <div class="flex justify-center gap-4 mb-8">
             @if (proj.viewUrl) {
               <a 
@@ -59,7 +60,7 @@
             }
           </div>
 
-          <!-- Project Image with Click-to-Zoom Effect -->
+          <!-- Project image with zoom functionality -->
           @if (proj.imageUrl) {
             <div class="mt-12">
               <div class="max-w-2xl mx-auto">
@@ -84,7 +85,6 @@
                       'scale(1) translate(0%, 0%)'"
                   />
                   
-                  <!-- Indicador sutil de que se puede hacer click -->
                   @if (!isImageZoomActive()) {
                     <div class="absolute bottom-3 right-3 bg-black/60 backdrop-blur-sm rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                       <svg class="w-4 h-4 text-yellow" fill="currentColor" viewBox="0 0 20 20">
@@ -100,13 +100,13 @@
         </div>
       </section>
   
-      <!-- Project Details Grid -->
+      <!-- Project details section -->
       <section class="py-16 animate-slide-in-bottom animate-delay-500">
         <div class="max-w-6xl mx-auto px-4">
           <div class="grid lg:grid-cols-2 gap-12">
-            
-            <!-- Left Column: Description -->
+            <!-- Left column: About and features -->
             <div class="space-y-8">
+              <!-- About section -->
               <div>
                 <h2 class="font-pixel text-orange-light text-xl mb-6">{{ translate('project.detail.about') }}</h2>
                 <p class="font-inter text-white leading-relaxed text-base">
@@ -114,7 +114,7 @@
                 </p>
               </div>
   
-              <!-- Key Features -->
+              <!-- Features list -->
               <div>
                 <h3 class="font-pixel text-orange-light text-lg mb-4">{{ translate('project.detail.features') }}</h3>
                 <div class="space-y-3">
@@ -128,10 +128,9 @@
               </div>
             </div>
   
-            <!-- Right Column: Technical Details -->
+            <!-- Right column: Tech stack and challenges -->
             <div class="space-y-8">
-              
-              <!-- Technology Stack -->
+              <!-- Technology stack -->
               <div>
                 <h3 class="font-pixel text-orange-light text-lg mb-4">{{ translate('project.detail.techStack') }}</h3>
                 <div class="grid grid-cols-2 gap-2">
@@ -143,7 +142,7 @@
                 </div>
               </div>
   
-              <!-- Development Challenges -->
+              <!-- Challenges section (if available) -->
               @if (proj.challenges && proj.challenges.length > 0) {
                 <div>
                   <h3 class="font-pixel text-orange-light text-lg mb-4">{{ translate('project.detail.challenges') }}</h3>
@@ -157,16 +156,13 @@
                   </div>
                 </div>
               }
-  
-              <!-- Project Metadata -->
-              
-  
             </div>
           </div>
         </div>
       </section>
   
-      <!-- Navigation Section -->
+      
+      <!-- Navigation section (currently hidden) -->
       <section class="py-12 animate-fade-in animate-delay-700">
         <div class="max-w-4xl mx-auto px-4">
           <div class="flex justify-between items-center">
@@ -208,8 +204,8 @@
         </div>
       </section>
   
+    <!-- 404 error state -->
     } @else {
-      <!-- Loading/Error State -->
       <div class="min-h-screen flex items-center justify-center">
         <div class="text-center">
           <div class="font-pixel text-yellow text-2xl mb-4">404</div>

@@ -9,22 +9,14 @@ import { ProjectsService } from "../../services/projects-service";
 import { TranslationService } from "../../services/translation-service";
 import { LenisService } from "../../services/lenis-service";
 
-/**
- * 🔒 SECURITY-AWARE COMPONENT: Professional SVG Handling
- * 
- * CRITICAL LEARNING POINTS:
- * 1. XSS Protection: Angular sanitizes HTML to prevent attacks
- * 2. DomSanitizer: Required for trusted HTML/SVG content
- * 3. Type Safety: SafeHtml ensures compile-time validation
- * 4. Performance: Pre-sanitized content avoids runtime overhead
- */
-
+// Tech item with sanitized SVG icon
 interface TechWithIcon {
   readonly name: string;
   readonly rawSvg: string;
   readonly sanitizedIcon: SafeHtml;
 }
 
+// Home page component with project portfolio and technologies
 @Component({
   selector: 'app-home',
   imports: [Particles, HomeAnimation, Card, Experience],
@@ -34,26 +26,26 @@ interface TechWithIcon {
 })
 export class Home implements OnInit {
   
-  // 🎯 DEPENDENCY INJECTION: Modern inject() pattern with security service
-  private readonly projectsService = inject(ProjectsService);
-  private readonly sanitizer = inject(DomSanitizer);
-  private readonly translationService = inject(TranslationService);
-  private readonly lenisService = inject(LenisService);
+  private readonly projectsService = inject(ProjectsService); // Project data service
+  private readonly sanitizer = inject(DomSanitizer); // HTML sanitization service
+  private readonly translationService = inject(TranslationService); // Translation service
+  private readonly lenisService = inject(LenisService); // Smooth scroll service
 
   
-  // Animation state management (restored to original working state)
-  private readonly animationCompleted = signal(false);
-  private readonly animationFadingOut = signal(false);
+  private readonly animationCompleted = signal(false); // Entry animation completion state
+  private readonly animationFadingOut = signal(false); // Animation fade out state
 
 
+  // Initialize smooth scrolling on component load
   ngOnInit(): void {
     this.lenisService.reinitialize();
   }
 
+  // Get translated text for given key
   translate(key: string): string {
     return this.translationService.translate(key);
   }
-  // ✅ CRITICAL INTEGRATION: Service data → Card-compatible format with translations
+  // Transform projects data for card display
   readonly projectCards = computed(() => 
     this.projectsService.translatedProjects().map(project => ({
       title: project.title,
@@ -66,24 +58,15 @@ export class Home implements OnInit {
     }))
   );
 
-  // 📊 DERIVED METRICS: Computed analytics from service data
+  // Get total number of projects
   readonly totalProjects = computed(() => 
     this.projectsService.projects().length
   );
 
-  /**
-   * 🎨 SECURITY-COMPLIANT TECHNOLOGY ICONS
-   * 
-   * TEACHING MOMENT: Professional SVG Security Handling
-   * 
-   * Why This Approach Is Superior:
-   * - ✅ XSS Protection: All content is sanitized
-   * - ✅ Type Safety: SafeHtml prevents runtime errors
-   * - ✅ Performance: Sanitization happens once, not per render
-   * - ✅ Maintainability: Clear separation of data and security
-   */
+
+  // Get unique technologies with sanitized SVG icons
   readonly uniqueTechnologies = computed((): readonly TechWithIcon[] => {
-    const rawTechData = [
+    const rawTechData = [ // Raw technology data with SVG icons
       {
         name: 'Angular',
         rawSvg: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="m12 2.5l8.84 3.15l-1.34 11.7L12 21.5l-7.5-4.15l-1.34-11.7zm0 2.1L6.47 17h2.06l1.11-2.78h4.7L15.45 17h2.05zm1.62 7.9h-3.23L12 8.63z"/></svg>`
@@ -133,7 +116,7 @@ export class Home implements OnInit {
       }
     ];
 
-    // 🔒 SECURITY STEP: Sanitize all SVG content upfront
+    // Sanitize SVG content for safe display
     return rawTechData.map(tech => ({
       name: tech.name,
       rawSvg: tech.rawSvg,
@@ -141,40 +124,41 @@ export class Home implements OnInit {
     }));
   });
 
+  // Get total number of technologies
   readonly techCount = computed(() => 
     this.uniqueTechnologies().length
   );
 
-  // Animation computed properties (restored to original)
+  // Determine if entry animation should show
   readonly showEntryAnimation = computed(() => 
     !this.animationCompleted() && this.shouldShowAnimationForThisSession()
   );
 
+  // Check if animation should show based on navigation type
   private shouldShowAnimationForThisSession(): boolean {
-    if (typeof window === 'undefined') return true; // Show during SSR
+    if (typeof window === 'undefined') return true; 
     
-    // Check if we came from internal navigation first
     const cameFromInternalNav = sessionStorage.getItem('portfolioInternalNavigation') === 'true';
     
     if (cameFromInternalNav) {
-      // Clear the flag and don't show animation
       sessionStorage.removeItem('portfolioInternalNavigation');
       return false;
     }
     
-    // If no internal navigation flag, this is a page load/reload - show animation
     return true;
   }
 
+  // Check if animation is currently fading out
   readonly isAnimationFadingOut = computed(() => 
     this.animationFadingOut()
   );
 
-  // Animation event handlers (existing code)
+  // Handle animation fade out start
   onAnimationFadeOutStarted(): void {
     this.animationFadingOut.set(true);
   }
 
+  // Handle entry animation completion
   onEntryAnimationComplete(): void {
     setTimeout(() => {
       this.animationCompleted.set(true);
@@ -182,26 +166,3 @@ export class Home implements OnInit {
   }
 }
 
-/**
- * 📚 CRITICAL SECURITY LESSONS:
- * 
- * 🔒 1. XSS PROTECTION UNDERSTANDING:
- *    - Angular sanitizes all HTML by default
- *    - SVG elements are considered potentially dangerous
- *    - DomSanitizer provides controlled bypass mechanism
- * 
- * ✅ 2. PROPER SANITIZATION PATTERN:
- *    - Always use bypassSecurityTrustHtml() for trusted content
- *    - Sanitize once during data preparation, not in template
- *    - Type safety with SafeHtml interface
- * 
- * 🎯 3. PERFORMANCE IMPLICATIONS:
- *    - Sanitization happens once in computed(), not per render
- *    - Angular's change detection optimizes SafeHtml usage
- *    - Memory efficient: reuses sanitized objects
- * 
- * ⚠️ 4. SECURITY BEST PRACTICES:
- *    - Never trust user-generated SVG content
- *    - Validate SVG structure before sanitization
- *    - Consider CSP headers for additional protection
- */

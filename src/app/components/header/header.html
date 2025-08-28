@@ -1,9 +1,11 @@
+<!-- Sticky header with navigation and language toggle -->
 <header class="bg-purple text-white border-b-4 border-yellow sticky top-0 z-50">
+    <!-- Header content container -->
     <div class="py-2 sm:py-3 px-3 sm:px-4 flex items-center justify-between max-w-5xl mx-auto font-pixel">
-        <!-- Logo/Brand -->
+        <!-- Logo/Brand link -->
         <a routerLink="/" class="hover:text-yellow transition-colors text-lg sm:text-base">NA</a>
         
-        <!-- Desktop Navigation -->
+        <!-- Desktop navigation menu -->
         <nav class="hidden md:flex gap-3 lg:gap-4">
             <a (click)="scrollToSection('home')" class="hover:text-yellow transition-colors cursor-pointer text-sm lg:text-base">{{ translate('nav.home') }}</a>
             <a (click)="scrollToSection('about')" class="hover:text-yellow transition-colors cursor-pointer text-sm lg:text-base">{{ translate('nav.about') }}</a>
@@ -11,9 +13,9 @@
             <a (click)="scrollToSection('projects')" class="hover:text-yellow transition-colors cursor-pointer text-sm lg:text-base">{{ translate('nav.projects') }}</a>
         </nav>
 
-        <!-- Right Section: Language + Mobile Menu -->
+        <!-- Language toggle and mobile menu button -->
         <div class="flex items-center gap-2">
-            <!-- Language Selector -->
+            <!-- Language switcher button -->
             <button 
                 (click)="toggleLanguage()"
                 class="font-pixel text-xs sm:text-sm px-2 py-1 border border-yellow bg-transparent hover:bg-yellow hover:text-purple transition-all duration-200 rounded-sm"
@@ -22,7 +24,7 @@
                 {{ currentLanguage().toUpperCase() }}
             </button>
 
-            <!-- Mobile Menu Button -->
+            <!-- Mobile menu toggle button -->
             <button 
                 class="md:hidden font-pixel text-xl p-2 hover:text-yellow transition-colors"
                 (click)="toggleMobileMenu()"
@@ -34,12 +36,13 @@
         </div>
     </div>
 
-    <!-- Mobile Navigation Dropdown -->
+    <!-- Mobile navigation menu -->
     <nav class="md:hidden border-t border-yellow/20 bg-purple-dark/90 backdrop-blur-sm overflow-hidden transition-all duration-300 ease-in-out"
          [class.max-h-0]="!isMobileMenuOpen()"
          [class.max-h-60]="isMobileMenuOpen()"
          [class.opacity-0]="!isMobileMenuOpen()"
          [class.opacity-100]="isMobileMenuOpen()">
+        <!-- Mobile menu items -->
         <div class="py-3 px-6 space-y-2 font-pixel">
             <a (click)="scrollToSection('home'); closeMobileMenu()" 
                class="block hover:text-yellow transition-colors cursor-pointer text-sm py-2 border-b border-transparent hover:border-yellow/30">

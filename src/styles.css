@@ -19,33 +19,9 @@
     --font-pixel: "Press Start 2P", system-ui, sans-serif;
 }
 
-
+/* Force to hide overflow so the page doesn't get wider than the viewport */
 html, body {
   overflow-x: hidden;
-  background-color: #3D348B;
-  transition: background-color 0.3s ease;
-}
-
-/* Prevenir desbordamiento horizontal */
-/* Ocultar scrollbar nativo (en navegadores comunes) */
-html {
-  scrollbar-width: none; /* Firefox */
-}
-
-html::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Edge */
-}
-
-/* Router transition improvements */
-router-outlet {
-  display: block;
-  background-color: #3D348B;
-}
-
-/* Ensure smooth page transitions without flash */
-app-root {
-  background-color: #3D348B;
-  min-height: 100vh;
 }
 
 /* Force scrollbar hiding during all states */
@@ -59,16 +35,5 @@ app-root {
   background: transparent !important;
 }
 
-/* Extra protection for body and html during route transitions */
-body.router-transitioning,
-html.router-transitioning {
-  overflow-x: hidden !important;
-  scrollbar-width: none !important;
-}
-
-body.router-transitioning::-webkit-scrollbar,
-html.router-transitioning::-webkit-scrollbar {
-  display: none !important;
-}
 
 

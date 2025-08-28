@@ -1,9 +1,10 @@
+<!-- Project card with responsive grid layout -->
 <article 
   class="grid grid-cols-1 sm:grid-cols-[minmax(100px,140px)_1fr] md:grid-cols-[minmax(120px,160px)_1fr] gap-3 sm:gap-4 p-3 sm:p-4 bg-purple 
          border border-yellow shadow-[4px_4px_0_0_var(--color-yellow)] 
          hover:shadow-[6px_6px_0_0_var(--color-yellow)] transition-shadow duration-200">
 
-  <!-- Image Section: Enhanced with better fallback -->
+  <!-- Project image or fallback icon -->
   <div class="h-20 sm:h-full flex items-center justify-center bg-purple border border-yellow min-h-[80px] sm:min-h-[100px] max-h-[120px] order-1 sm:order-none">
     @if (imageUrl()) {
       <img [src]="imageUrl()" [alt]="title()" class="h-full w-auto object-cover" />
@@ -15,16 +16,16 @@
     }
   </div>
 
-  <!-- Content Section: Enhanced with dual actions -->
+  <!-- Project content and actions -->
   <div class="flex flex-col gap-2 sm:gap-3 order-2 sm:order-none">
     
-    <!-- Project Title -->
+    <!-- Project title -->
     <h3 class="font-pixel text-yellow text-sm sm:text-sm leading-relaxed">{{ title() }}</h3>
     
-    <!-- Project Description -->
+    <!-- Project description -->
     <p class="text-white text-xs sm:text-sm leading-relaxed font-inter flex-grow">{{ description() }}</p>
     
-    <!-- Technology Tags -->
+    <!-- Technology tags -->
     <div class="flex gap-1 sm:gap-2 flex-wrap">
       @for (tech of tags(); track tech) {
         <span class="font-pixel text-xs px-1.5 sm:px-2 py-1 border border-orange-light text-orange-light 
@@ -34,10 +35,8 @@
       }
     </div>
     
-    <!-- Action Buttons Grid: Professional dual-action layout -->
-      
-      <!-- Primary Action Row -->
-      @if (buttonConfig().showDetails) {
+    <!-- Details button (if project has details page) -->
+    @if (buttonConfig().showDetails) {
         <button 
           (click)="navigateToProject()"
           class="font-pixel px-3 sm:px-4 py-2 bg-yellow text-purple 
@@ -50,8 +49,9 @@
         </button>
       }
       
-      <!-- Secondary Actions Row -->
+      <!-- Action buttons for GitHub and live demo -->
       <div class="grid grid-cols-2 gap-1.5 sm:gap-2">
+        <!-- GitHub repository button -->
         @if (buttonConfig().showGithub) {
           <button 
             (click)="openGitHub()"
@@ -66,6 +66,7 @@
           </button>
         }
         
+        <!-- Live demo button -->
         @if (buttonConfig().showLive) {
           <button 
             (click)="openLiveDemo()"

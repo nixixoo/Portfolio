@@ -1,14 +1,11 @@
-// ===========================================
-// SOLUCIÓN: PROJECT DETAIL COMPONENT CORREGIDO
-// ===========================================
 
-// src/app/pages/project-detail/project-detail.ts
 import { Component, ChangeDetectionStrategy, computed, inject, signal } from '@angular/core';
 import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import { ProjectsService, ProjectData } from '../../services/projects-service';
 import { TranslationService } from '../../services/translation-service';
 import { CommonModule } from '@angular/common';
 
+// Project detail page component with image zoom and navigation
 @Component({
   selector: 'app-project-detail',
   standalone: true,
@@ -18,38 +15,24 @@ import { CommonModule } from '@angular/common';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProjectDetail {
-  private readonly projectsService = inject(ProjectsService);
-  private readonly router = inject(Router);
-  private readonly route = inject(ActivatedRoute);
-  private readonly translationService = inject(TranslationService);
+  private readonly projectsService = inject(ProjectsService); // Project data service
+  private readonly router = inject(Router); // Navigation service
+  private readonly route = inject(ActivatedRoute); // Route parameters service
+  private readonly translationService = inject(TranslationService); // Translation service
 
-  // Image zoom state
-  readonly isImageZoomActive = signal(false);
-  readonly imageMousePosition = signal<{x: number, y: number}>({ x: 50, y: 50 });
+  readonly isImageZoomActive = signal(false); // Image zoom state
+  readonly imageMousePosition = signal<{x: number, y: number}>({ x: 50, y: 50 }); // Mouse position for zoom
 
-  /**
-   * 🔑 CRITICAL FIX: Use ActivatedRoute instead of input.required()
-   * 
-   * Why this approach is superior:
-   * - Compatible with SSR: No timing issues during server rendering
-   * - Reactive: Automatically updates when route parameters change
-   * - Safe: Returns null when parameter is not available
-   * - Performance: Only recalculates when route actually changes
-   */
+  
+  // Get project ID from route parameters
   readonly projectId = computed(() => {
     return this.route.snapshot.paramMap.get('id');
   });
 
-  /**
-   * 🎯 REACTIVE PROJECT DATA: Safe project lookup with null handling
-   * 
-   * Teaching Point: Always handle potential null states in computed()
-   * This prevents runtime errors and provides graceful degradation
-   */
+  // Get current project data with navigation fallback
   readonly project = computed(() => {
     const id = this.projectId();
     
-    // Guard clause: Handle case where ID is not available
     if (!id) {
       return null;
     }
@@ -57,46 +40,36 @@ export class ProjectDetail {
     const project = this.projectsService.getProjectById(id);
     
     if (!project) {
-      // Graceful error handling - redirect to home after a brief delay
-      setTimeout(() => this.router.navigate(['']), 100);
+      setTimeout(() => this.router.navigate(['']), 100); // Redirect if project not found
       return null;
     }
     
     return project;
   });
 
-  /**
-   * 📍 NAVIGATION CONTEXT: Safe navigation with null checks
-   * 
-   * Critical Pattern: Always check for null before array operations
-   */
+
+  // Get previous and next project for navigation
   readonly navigationData = computed(() => {
     const projects = this.projectsService.projects();
     const currentProject = this.project();
     
-    // Early return pattern: Prevent unnecessary computations
     if (!currentProject) {
       return { prev: null, next: null };
     }
     
     const currentIndex = projects.findIndex(p => p.id === currentProject.id);
     
-    // Boundary checking: Prevent array out-of-bounds errors
     return {
       prev: currentIndex > 0 ? projects[currentIndex - 1] : null,
       next: currentIndex < projects.length - 1 ? projects[currentIndex + 1] : null
     };
   });
 
-  /**
-   * 🎨 CATEGORY STYLING: Safe styling with fallback
-   * 
-   * Best Practice: Always provide fallback values in computed properties
-   */
+ 
+  // Get CSS classes for project category badge
   readonly categoryStyles = computed(() => {
     const project = this.project();
     
-    // Null safety: Return default style if project is not available
     if (!project) {
       return 'bg-purple text-yellow';
     }
@@ -111,13 +84,9 @@ export class ProjectDetail {
     return styles[project.category] || 'bg-purple text-yellow';
   });
 
-  /**
-   * 🧭 NAVIGATION METHODS: Safe navigation with validation
-   * 
-   * Teaching Point: Always validate parameters before navigation
-   */
+
+  // Navigate to another project page
   navigateToProject(projectId: string): void {
-    // Input validation: Prevent navigation with invalid IDs
     if (!projectId || projectId.trim() === '') {
       console.warn('Invalid project ID provided for navigation');
       return;
@@ -126,29 +95,31 @@ export class ProjectDetail {
     this.router.navigate(['/project', projectId]);
   }
 
+  // Navigate back to home page
   goBack(): void {
-    // Mark that we're navigating internally (not a page reload)
     if (typeof window !== 'undefined') {
       sessionStorage.setItem('portfolioInternalNavigation', 'true');
     }
     
-    // Consistent navigation: Always navigate to root, not history back
     this.router.navigate(['']);
   }
 
+  // Get translated text for given key
   translate(key: string): string {
     return this.translationService.translate(key);
   }
 
+  // Get translated status text
   translateStatus(status: string): string {
     return this.translationService.translate(`status.${status}`);
   }
 
-  // Image zoom methods
+  // Toggle image zoom on click
   onImageClick(): void {
     this.isImageZoomActive.set(!this.isImageZoomActive());
   }
 
+  // Track mouse position for image zoom effect
   onImageMouseMove(event: MouseEvent): void {
     if (this.isImageZoomActive()) {
       const rect = (event.target as HTMLElement).getBoundingClientRect();
@@ -158,8 +129,8 @@ export class ProjectDetail {
     }
   }
 
+  // Disable zoom when mouse leaves image
   onImageMouseLeave(): void {
-    // Opcional: desactivar zoom al salir de la imagen
-    // this.isImageZoomActive.set(false);
+    this.isImageZoomActive.set(false);
   }
 }

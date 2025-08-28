@@ -1,3 +1,4 @@
+<!-- Entry animation overlay -->
 @if (showEntryAnimation()) {
   <div
     class="fixed inset-0 bg-purple flex items-center justify-center overflow-hidden z-50 transition-opacity duration-800"
@@ -11,11 +12,14 @@
   </div>
   }
   
+  <!-- Main content with background and particles -->
   <main class="bg-purple w-full min-h-dvh animate-fade-in animate-duration-700">
+    <!-- Floating particles background -->
     <app-particles class="absolute w-full h-full inset-0 pointer-events-none"></app-particles>
   
-    <!-- Hero Section -->
+    <!-- Hero section -->
     <section id="home" class="relative flex items-center w-full justify-center h-dvh animate-slide-in-bottom animate-delay-300">
+      <!-- Hero content -->
       <div class="font-pixel text-center pb-18">
         <p class="text-yellow text-xl mb-3">{{ translate('hero.name') }}</p>
         <h1 class="sm:text-2xl md:text-3xl lg:text-4xl text-white">{{ translate('hero.title') }}</h1>
@@ -28,16 +32,16 @@
       
     </section>
   
-    <!-- About Me Section -->
+    <!-- About section -->
     <section id="about" class="bg-purple w-full text-white py-16 animate-slide-in-bottom animate-delay-500">
       <div class="max-w-4xl mx-auto px-4">
-        <!-- Section Header -->
+        <!-- About section header -->
         <div class="text-center mb-12">
           <h2 class="font-pixel text-yellow text-2xl mb-4">{{ translate('about.title') }}</h2>
           <div class="w-16 h-1 bg-yellow mx-auto"></div>
         </div>
   
-        <!-- Personal Introduction -->
+        <!-- About content -->
         <div class="space-y-6 text-center max-w-3xl mx-auto">
           <p class="font-inter text-white text-lg leading-relaxed">
             {{ translate('about.intro') }}
@@ -47,23 +51,16 @@
             {{ translate('about.description') }}
           </p>
   
-          <!-- Technology Stack Display - SECURITY-COMPLIANT VERSION -->
+          <!-- Technology stack section -->
           <div class="mt-16 pt-8 border-yellow/20">
             <h3 class="font-pixel text-orange-light text-lg mb-6 text-center">{{ translate('about.techStack') }}</h3>
+            <!-- Technology badges -->
             <div class="flex flex-wrap justify-center gap-3">
-              <!-- 🔒 SECURITY-FIRST: Sanitized SVG Rendering -->
               @for (tech of uniqueTechnologies(); track tech.name) {
                 <div class="font-pixel text-xs px-3 py-2 border border-orange-light text-orange-light 
                            hover:bg-orange-light hover:text-purple transition-colors cursor-default
                            flex items-center gap-2">
-                  <!-- 
-                    🎯 CRITICAL SECURITY PATTERN:
-                    - sanitizedIcon is SafeHtml, not raw string
-                    - DomSanitizer has validated the content
-                    - No XSS warnings, full security compliance
-                  -->
                   <span [innerHTML]="tech.sanitizedIcon" class="flex-shrink-0"></span>
-                  <!-- Text content remains interpolated for safety -->
                   <span>{{ tech.name }}</span>
                 </div>
               }
@@ -73,20 +70,21 @@
       </div>
     </section>
   
-    <!-- Experience Section -->
+    <!-- Experience section component -->
     <app-experience id="experience"></app-experience>
   
-    <!-- 🎯 PROJECTS SECTION: Complete Integration with Service -->
+    <!-- Projects section -->
     <section id="projects" class="bg-purple w-full text-white py-16 animate-slide-in-bottom animate-delay-700">
       <div class="max-w-5xl mx-auto px-4">
-        <!-- Projects Header with Dynamic Data -->
+        <!-- Projects section header -->
         <div class="text-center mb-12">
           <h2 class="font-pixel text-yellow text-2xl mb-4">{{ translate('projects.title') }}</h2>
           <div class="w-16 h-1 bg-yellow mx-auto mt-4"></div>
         </div>
   
-        <!-- ✅ CRITICAL: Cards Grid Powered by ProjectsService -->
+        <!-- Projects grid -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Loop through projects -->
           @for (project of projectCards(); track project.title) {
             <app-card
               [title]="project.title"
@@ -99,8 +97,8 @@
               class="transform hover:-translate-y-2 transition-all duration-300"
             />
           
+          <!-- Empty state when no projects -->
           } @empty {
-          <!-- Graceful fallback for empty state -->
           <div class="col-span-full text-center py-12">
             <div class="border-2 border-yellow/30 border-dashed p-8">
               <p class="font-pixel text-yellow text-sm mb-2">{{ translate('projects.empty.title') }}</p>

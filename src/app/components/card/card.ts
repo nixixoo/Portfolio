@@ -2,15 +2,7 @@ import { Component, input, inject, computed } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslationService } from '../../services/translation-service';
 
-/**
- * 🎯 CARD COMPONENT: Enhanced with Dual Action Pattern
- * 
- * ARCHITECTURAL PRINCIPLES:
- * - Single Responsibility: Card only handles presentation
- * - Separation of Concerns: Navigation vs External Links
- * - Conditional Logic: Smart action button rendering
- * - Type Safety: Strong typing prevents runtime errors
- */
+// Card component for displaying project information with action buttons
 @Component({
   selector: 'app-card',
   standalone: true,
@@ -18,56 +10,38 @@ import { TranslationService } from '../../services/translation-service';
   styleUrls: ['./card.css']
 })
 export class Card {
-  private readonly router = inject(Router);
-  private readonly translationService = inject(TranslationService);
+  private readonly router = inject(Router); // Navigation service
+  private readonly translationService = inject(TranslationService); // Translation service
 
-  // ✅ EXISTING INPUTS: Maintain backward compatibility
-  readonly title = input<string>('');
-  readonly imageUrl = input<string>('');  
-  readonly description = input<string>('');
-  readonly tags = input<readonly string[]>([]);
-  
-  // 🔑 ENHANCED INPUTS: Multiple URL types
-  readonly projectId = input<string>('');
-  readonly githubUrl = input<string>('');
-  readonly liveUrl = input<string>('');
+  readonly title = input<string>(''); // Project title
+  readonly imageUrl = input<string>(''); // Project image URL
+  readonly description = input<string>(''); // Project description
+  readonly tags = input<readonly string[]>([]); // Technology tags
+  readonly projectId = input<string>(''); // Project ID for navigation
+  readonly githubUrl = input<string>(''); // GitHub repository URL
+  readonly liveUrl = input<string>(''); // Live demo URL
 
-  /**
-   * 🎯 COMPUTED ACTION STATES
-   * 
-   * Why computed() over methods:
-   * - Memoized: Only recalculates when inputs change
-   * - Reactive: Updates automatically with input changes
-   * - Performance: Avoids unnecessary function calls in templates
-   * - Type-safe: Compile-time validation of logic
-   */
+  // Check if project has navigation details
   readonly hasProjectNavigation = computed(() => 
     Boolean(this.projectId())
   );
 
+  // Check if project has GitHub link
   readonly hasGithubLink = computed(() => 
     Boolean(this.githubUrl())
   );
 
+  // Check if project has live demo
   readonly hasLiveDemo = computed(() => 
     Boolean(this.liveUrl())
   );
 
-  /**
-   * 📊 COMPUTED BUTTON CONFIGURATION
-   * 
-   * Teaching Point: Complex UI logic should be computed, not in templates
-   * This approach provides:
-   * - Clear separation of concerns
-   * - Testable business logic
-   * - Better performance through memoization
-   */
+  // Configuration for action buttons based on available URLs
   readonly buttonConfig = computed(() => {
     return {
       showDetails: this.hasProjectNavigation(),
       showGithub: this.hasGithubLink(),
       showLive: this.hasLiveDemo(),
-      // Priority order: Details > Live Demo > GitHub
       primaryAction: this.hasProjectNavigation() 
         ? 'details' 
         : this.hasLiveDemo() 
@@ -76,12 +50,7 @@ export class Card {
     };
   });
 
-  /**
-   * 🧭 NAVIGATION METHODS: Type-safe action handlers
-   * 
-   * Best Practice: Validate inputs before taking actions
-   * This prevents silent failures and improves debugging
-   */
+  // Navigate to project details page
   navigateToProject(): void {
     const id = this.projectId();
     if (!id) {
@@ -92,6 +61,7 @@ export class Card {
     this.router.navigate(['/project', id]);
   }
 
+  // Open GitHub repository in new tab
   openGitHub(): void {
     const url = this.githubUrl();
     if (!url) {
@@ -99,10 +69,10 @@ export class Card {
       return;
     }
     
-    // Security: Ensure proper window.open usage
     window.open(url, '_blank', 'noopener,noreferrer');
   }
 
+  // Open live demo in new tab
   openLiveDemo(): void {
     const url = this.liveUrl();
     if (!url) {
@@ -113,6 +83,7 @@ export class Card {
     window.open(url, '_blank', 'noopener,noreferrer');
   }
 
+  // Get translated text for given key
   translate(key: string): string {
     return this.translationService.translate(key);
   }

@@ -1,8 +1,10 @@
+<!-- Full screen animation overlay with fade transition -->
 <div 
   class="fixed inset-0 z-[9999] flex items-center justify-center bg-purple transition-opacity duration-500 px-4 sm:px-0"
   [class.opacity-0]="!isHydrated()"
   [class.opacity-100]="isHydrated()"
 >
+  <!-- Main title with animation states -->
   <h1 
     class="text-white text-2xl sm:text-3xl md:text-4xl font-bold font-pixel transition-all duration-500 text-center max-w-sm sm:max-w-none"
     [class.text-yellow]="isAnimationActive()"
@@ -16,6 +18,7 @@
     [class.invisible]="!shouldShowText()"
     [class.visible]="shouldShowText()"
   >
+    <!-- Developer name -->
     Nicolás Aliaga
   </h1>
 </div>

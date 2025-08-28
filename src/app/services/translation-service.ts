@@ -1,15 +1,18 @@
 import { Injectable, computed, inject } from '@angular/core';
 import { LanguageService, Language } from './language-service';
 
+// Translation data structure for multiple languages
 interface Translations {
-  en: Record<string, string>;
-  es: Record<string, string>;
+  en: Record<string, string>; // English translations
+  es: Record<string, string>; // Spanish translations
 }
 
+// Service for handling translations based on current language
 @Injectable({ providedIn: 'root' })
 export class TranslationService {
-  private readonly languageService = inject(LanguageService);
+  private readonly languageService = inject(LanguageService); // Language state service
 
+  // All translation data for supported languages
   private readonly translations: Translations = {
     en: {
       // Navigation
@@ -189,11 +192,13 @@ export class TranslationService {
     }
   };
 
+  // Get translations for current language
   readonly currentTranslations = computed(() => {
     const currentLang = this.languageService.currentLanguage();
     return this.translations[currentLang];
   });
 
+  // Get translated text for given key, fallback to key if not found
   translate(key: string): string {
     const translations = this.currentTranslations();
     return translations[key] || key;
