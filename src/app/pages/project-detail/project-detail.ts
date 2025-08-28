@@ -121,7 +121,18 @@ export class ProjectDetail implements OnInit {
     if (typeof window !== 'undefined') {
       sessionStorage.setItem('portfolioInternalNavigation', 'true');
     }
+    
     this.location.back();
+    
+    // Force scroll to top after navigation
+    setTimeout(() => {
+      const lenis = this.lenisService.getLenis();
+      if (lenis) {
+        lenis.scrollTo(0, { immediate: true });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'auto' });
+      }
+    }, 50);
   }
 
   // Get translated text for given key
