@@ -39,6 +39,8 @@ export class LenisService implements OnDestroy {
 
     if (!track || !thumb) return; // Exit if scrollbar elements not found
 
+
+    
     // Update scrollbar thumb position on scroll
     this.lenis.on('scroll', ({ scroll, limit }) => {
       if (this.isDragging) return; // Don't update during drag

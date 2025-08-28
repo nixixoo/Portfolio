@@ -1,8 +1,10 @@
 
-import { Component, ChangeDetectionStrategy, computed, inject, signal } from '@angular/core';
+import { Component, ChangeDetectionStrategy, computed, inject, signal, OnInit } from '@angular/core';
 import { Router, RouterLink, ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 import { ProjectsService, ProjectData } from '../../services/projects-service';
 import { TranslationService } from '../../services/translation-service';
+import { LenisService } from '../../services/lenis-service';
 import { CommonModule } from '@angular/common';
 
 // Project detail page component with image zoom and navigation
@@ -14,15 +16,35 @@ import { CommonModule } from '@angular/common';
   styleUrl: './project-detail.css',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProjectDetail {
+export class ProjectDetail implements OnInit {
   private readonly projectsService = inject(ProjectsService); // Project data service
   private readonly router = inject(Router); // Navigation service
   private readonly route = inject(ActivatedRoute); // Route parameters service
+  private readonly location = inject(Location); // Angular location service
+  private readonly lenisService = inject(LenisService); // Smooth scroll service
   private readonly translationService = inject(TranslationService); // Translation service
 
   readonly isImageZoomActive = signal(false); // Image zoom state
   readonly imageMousePosition = signal<{x: number, y: number}>({ x: 50, y: 50 }); // Mouse position for zoom
 
+  // Smooth scroll to top when entering project detail page
+  ngOnInit(): void {
+    if (typeof window !== 'undefined') {
+      // Try Lenis first for smooth scroll, fallback to native smooth scroll
+      const lenis = this.lenisService.getLenis();
+      if (lenis) {
+        lenis.scrollTo(0, { 
+          duration: 1.0,
+          easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+        });
+      } else {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      }
+    }
+  }
   
   // Get project ID from route parameters
   readonly projectId = computed(() => {
@@ -88,20 +110,18 @@ export class ProjectDetail {
   // Navigate to another project page
   navigateToProject(projectId: string): void {
     if (!projectId || projectId.trim() === '') {
-      console.warn('Invalid project ID provided for navigation');
       return;
     }
     
     this.router.navigate(['/project', projectId]);
   }
 
-  // Navigate back to home page
+  // Navigate back using browser history
   goBack(): void {
     if (typeof window !== 'undefined') {
       sessionStorage.setItem('portfolioInternalNavigation', 'true');
     }
-    
-    this.router.navigate(['']);
+    this.location.back();
   }
 
   // Get translated text for given key

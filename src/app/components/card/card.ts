@@ -54,7 +54,6 @@ export class Card {
   navigateToProject(): void {
     const id = this.projectId();
     if (!id) {
-      console.warn('Card: Cannot navigate - projectId is empty');
       return;
     }
     
@@ -65,7 +64,6 @@ export class Card {
   openGitHub(): void {
     const url = this.githubUrl();
     if (!url) {
-      console.warn('Card: Cannot open GitHub - URL is empty');
       return;
     }
     
@@ -76,7 +74,6 @@ export class Card {
   openLiveDemo(): void {
     const url = this.liveUrl();
     if (!url) {
-      console.warn('Card: Cannot open demo - URL is empty');
       return;
     }
     

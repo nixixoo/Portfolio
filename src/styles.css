@@ -20,8 +20,10 @@
 }
 
 /* Force to hide overflow so the page doesn't get wider than the viewport */
+/* BG color for transition consistency */
 html, body {
   overflow-x: hidden;
+  background-color: var(--color-purple);
 }
 
 /* Force scrollbar hiding during all states */
