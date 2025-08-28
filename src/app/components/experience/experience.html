@@ -3,7 +3,7 @@
         
         <!-- Header de la sección -->
         <div class="text-center mb-12">
-          <h2 class="font-pixel text-yellow text-2xl mb-4">Experience</h2>
+          <h2 class="font-pixel text-yellow text-2xl mb-4">{{ translate('experience.title') }}</h2>
           <!-- <p class="font-inter text-white text-lg">
             {{ yearsOfExperience() }}+ years building digital experiences
           </p> -->
@@ -22,7 +22,7 @@
             />
           } @empty {
             <div class="text-center py-12">
-              <p class="font-pixel text-yellow text-sm">No experience data available</p>
+              <p class="font-pixel text-yellow text-sm">{{ translate('experience.empty.title') }}</p>
             </div>
           }
         </div>

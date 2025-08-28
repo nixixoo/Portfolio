@@ -3,9 +3,10 @@
 // ===========================================
 
 // src/app/pages/project-detail/project-detail.ts
-import { Component, ChangeDetectionStrategy, computed, inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, computed, inject, signal } from '@angular/core';
 import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import { ProjectsService, ProjectData } from '../../services/projects-service';
+import { TranslationService } from '../../services/translation-service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -20,6 +21,11 @@ export class ProjectDetail {
   private readonly projectsService = inject(ProjectsService);
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
+  private readonly translationService = inject(TranslationService);
+
+  // Image zoom state
+  readonly isImageZoomActive = signal(false);
+  readonly imageMousePosition = signal<{x: number, y: number}>({ x: 50, y: 50 });
 
   /**
    * 🔑 CRITICAL FIX: Use ActivatedRoute instead of input.required()
@@ -121,7 +127,39 @@ export class ProjectDetail {
   }
 
   goBack(): void {
+    // Mark that we're navigating internally (not a page reload)
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('portfolioInternalNavigation', 'true');
+    }
+    
     // Consistent navigation: Always navigate to root, not history back
     this.router.navigate(['']);
+  }
+
+  translate(key: string): string {
+    return this.translationService.translate(key);
+  }
+
+  translateStatus(status: string): string {
+    return this.translationService.translate(`status.${status}`);
+  }
+
+  // Image zoom methods
+  onImageClick(): void {
+    this.isImageZoomActive.set(!this.isImageZoomActive());
+  }
+
+  onImageMouseMove(event: MouseEvent): void {
+    if (this.isImageZoomActive()) {
+      const rect = (event.target as HTMLElement).getBoundingClientRect();
+      const x = ((event.clientX - rect.left) / rect.width) * 100;
+      const y = ((event.clientY - rect.top) / rect.height) * 100;
+      this.imageMousePosition.set({ x, y });
+    }
+  }
+
+  onImageMouseLeave(): void {
+    // Opcional: desactivar zoom al salir de la imagen
+    // this.isImageZoomActive.set(false);
   }
 }

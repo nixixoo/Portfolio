@@ -1,6 +1,8 @@
 import { Component, Inject, PLATFORM_ID, inject, signal } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { LenisService } from '../../services/lenis-service';
+import { LanguageService } from '../../services/language-service';
+import { TranslationService } from '../../services/translation-service';
 
 @Component({
   selector: 'app-header',
@@ -12,11 +14,14 @@ export class Header {
   
   // Modern inject() pattern for dependency injection
   private readonly lenisService = inject(LenisService);
+  private readonly languageService = inject(LanguageService);
+  private readonly translationService = inject(TranslationService);
   
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
   private mobileMenuOpen = signal(false);
 
   isMobileMenuOpen = this.mobileMenuOpen.asReadonly();
+  currentLanguage = this.languageService.currentLanguage;
   
   toggleMobileMenu(): void {
     this.mobileMenuOpen.update(isOpen => !isOpen);
@@ -24,6 +29,14 @@ export class Header {
   
   closeMobileMenu(): void {
     this.mobileMenuOpen.set(false);
+  }
+
+  toggleLanguage(): void {
+    this.languageService.toggleLanguage();
+  }
+
+  translate(key: string): string {
+    return this.translationService.translate(key);
   }
 
   /**

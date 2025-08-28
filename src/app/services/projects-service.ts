@@ -1,4 +1,5 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, computed, inject } from '@angular/core';
+import { TranslationService } from './translation-service';
 
 export interface ProjectData {
   readonly id: string;
@@ -18,93 +19,112 @@ export interface ProjectData {
 
 @Injectable({ providedIn: 'root' })
 export class ProjectsService {
+  private readonly translationService = inject(TranslationService);
+  
   private readonly projectsState = signal<readonly ProjectData[]>([
     {
       id: 'portfolio',
-      title: 'Portfolio',
-      description: 'A minimalist, pixelated portfolio.',
-      longDescription: `This portfolio represents a modern approach to personal branding through 
-        web development. Built with Angular 20's cutting-edge features including signals, zoneless 
-        change detection, and SSR capabilities. The design embraces a retro-pixelated aesthetic 
-        while maintaining professional functionality and performance optimization.`,
+      title: '', // Will be populated by translation service
+      description: '', // Will be populated by translation service
+      longDescription: '', // Will be populated by translation service
+      imageUrl: '/images/Portfolio.png',
       technologies: ['Angular', 'Tailwind', 'TypeScript'],
       viewUrl: 'https://github.com/nixixoo/Portfolio',
       githubUrl: 'https://github.com/nixixoo/Portfolio',
       status: 'completed',
       startDate: '2025-08',
       category: 'portfolio',
-      features: [
-        'Modern Angular 20 with Signals API',
-        'Server-Side Rendering for optimal SEO',
-        'Custom smooth scrolling with Lenis integration',
-        'Performance-optimized particle animations',
-        'Zoneless change detection for better performance'
-      ],
-      challenges: [
-        'Implementing SSR with client-side animations',
-        'Custom scrollbar integration with Lenis',
-        'Balancing retro aesthetics with modern UX',
-        'Optimizing bundle size while maintaining features'
-      ]
+      features: [], // Will be populated by translation service (5 features)
+      challenges: [] // Will be populated by translation service (4 challenges)
     },
     {
       id: 'mynotex',
-      title: 'My Notex',
-      description: 'A simple note taking application with AI chat integrated.',
-      longDescription: `My Notex is a comprehensive note-taking platform that bridges traditional 
-        note organization with AI-powered assistance. Built with a modern tech stack featuring 
-        Angular for the frontend, Node.js/Express for the backend, and TursoSQL for efficient 
-        data management. The integrated AI chat talks with the users inside the context of the note.`,
+      title: '', // Will be populated by translation service
+      description: '', // Will be populated by translation service  
+      longDescription: '', // Will be populated by translation service
+      imageUrl: '/images/MyNotex1.png',
       technologies: ['Angular', 'TypeScript', 'Node.js', 'Express', 'TursoSQL'],
       viewUrl: 'https://mynotex.vercel.app',
       githubUrl: 'https://github.com/nixixoo/Notex',
       status: 'completed',
       startDate: '2025-02',
       category: 'web-app',
-      features: [
-        'Real-time note editing and synchronization',
-        'Smart note categorization and tagging',
-        'Offline-first architecture with sync'
-      ],
-      challenges: [
-        'Integrating AI chat seamlessly with note interface',
-        ''
-      ]
+      features: [], // Will be populated by translation service (3 features)
+      challenges: [] // Will be populated by translation service (1 challenge)
     },
     {
       id: 'abysstr',
-      title: 'Abyss Team Request',
-      description: 'A platform where you can sent a team request to your favorite content creator, so he can play with that.',
-      longDescription: `Abyss Team Request is an innovative platform designed to connect Genshin Impact 
-        communities with content creators. Users can submit team requests with a message included, 
-        providing more interaction between content creator and public. Built with Angular and Firebase, 
-        including authentication and user profiles.`,
+      title: '', // Will be populated by translation service
+      description: '', // Will be populated by translation service
+      longDescription: '', // Will be populated by translation service
+      imageUrl: '/images/AbyssTR1.png',
       technologies: ['Angular', 'TypeScript', 'Firebase'],
       viewUrl: 'https://abyssteamrequest.vercel.app',
       githubUrl: 'https://github.com/nixixoo/AbyssPage',
       status: 'completed',
       startDate: '2024-12',
       category: 'platform',
-      features: [
-        'Request submission system',
-        'Content creator profile management',
-        'Integrated little note system',
-      ],
-      challenges: [
-        'Implementing real-time features without performance degradation',
-        'Creating intuitive UX for complex user interactions',
-      ]
+      features: [], // Will be populated by translation service (3 features)
+      challenges: [] // Will be populated by translation service (2 challenges)
     }
   ]);
 
   readonly projects = this.projectsState.asReadonly();
+
+  // ✅ Translated projects with reactive updates
+  readonly translatedProjects = computed(() => 
+    this.projects().map(project => ({
+      ...project,
+      title: this.translate(`project.${project.id}.title`),
+      description: this.translate(`project.${project.id}.description`),
+      longDescription: this.translate(`project.${project.id}.longDescription`),
+      features: this.getTranslatedFeatures(project.id),
+      challenges: this.getTranslatedChallenges(project.id)
+    }))
+  );
+
+  private getTranslatedFeatures(projectId: string): string[] {
+    const features: string[] = [];
+    let index = 1;
+    
+    while (true) {
+      const key = `project.${projectId}.feature${index}`;
+      const translation = this.translate(key);
+      
+      // If translation returns the key itself, it means no translation exists
+      if (translation === key) break;
+      
+      features.push(translation);
+      index++;
+    }
+    
+    return features;
+  }
+
+  private getTranslatedChallenges(projectId: string): string[] {
+    const challenges: string[] = [];
+    let index = 1;
+    
+    while (true) {
+      const key = `project.${projectId}.challenge${index}`;
+      const translation = this.translate(key);
+      
+      // If translation returns the key itself, it means no translation exists
+      if (translation === key) break;
+      
+      challenges.push(translation);
+      index++;
+    }
+    
+    return challenges;
+  }
 
   /**
    * 🔍 PROJECT LOOKUP: Efficient single-project retrieval
    * Used by router for detail page resolution
    */
   getProjectById(id: string): ProjectData | undefined {
-    return this.projects().find(project => project.id === id);
+    return this.translatedProjects().find(project => project.id === id);
   }
 
   /**
@@ -117,4 +137,8 @@ export class ProjectsService {
     technologies: [...new Set(this.projects().flatMap(p => p.technologies))].length,
     categories: [...new Set(this.projects().map(p => p.category))].length
   });
+
+  translate(key: string): string {
+    return this.translationService.translate(key);
+  }
 }

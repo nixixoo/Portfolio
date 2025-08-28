@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, signal, computed, inject } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal, computed, inject, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import lenis from 'lenis';
 import { Particles } from "../../components/particles/particles";
@@ -6,6 +6,8 @@ import { HomeAnimation } from "../../components/home-animation/home-animation";
 import { Card } from "../../components/card/card";
 import { Experience } from "../../components/experience/experience";
 import { ProjectsService } from "../../services/projects-service";
+import { TranslationService } from "../../services/translation-service";
+import { LenisService } from "../../services/lenis-service";
 
 /**
  * 🔒 SECURITY-AWARE COMPONENT: Professional SVG Handling
@@ -30,19 +32,30 @@ interface TechWithIcon {
   styleUrls: ['./home.css'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class Home {
+export class Home implements OnInit {
   
   // 🎯 DEPENDENCY INJECTION: Modern inject() pattern with security service
   private readonly projectsService = inject(ProjectsService);
   private readonly sanitizer = inject(DomSanitizer);
+  private readonly translationService = inject(TranslationService);
+  private readonly lenisService = inject(LenisService);
+
   
-  // Animation state management (existing code)
+  // Animation state management (restored to original working state)
   private readonly animationCompleted = signal(false);
   private readonly animationFadingOut = signal(false);
 
-  // ✅ CRITICAL INTEGRATION: Service data → Card-compatible format
+
+  ngOnInit(): void {
+    this.lenisService.reinitialize();
+  }
+
+  translate(key: string): string {
+    return this.translationService.translate(key);
+  }
+  // ✅ CRITICAL INTEGRATION: Service data → Card-compatible format with translations
   readonly projectCards = computed(() => 
-    this.projectsService.projects().map(project => ({
+    this.projectsService.translatedProjects().map(project => ({
       title: project.title,
       description: project.description,
       tags: project.technologies,
@@ -132,10 +145,26 @@ export class Home {
     this.uniqueTechnologies().length
   );
 
-  // Animation computed properties (existing code)
+  // Animation computed properties (restored to original)
   readonly showEntryAnimation = computed(() => 
-    !this.animationCompleted()
+    !this.animationCompleted() && this.shouldShowAnimationForThisSession()
   );
+
+  private shouldShowAnimationForThisSession(): boolean {
+    if (typeof window === 'undefined') return true; // Show during SSR
+    
+    // Check if we came from internal navigation first
+    const cameFromInternalNav = sessionStorage.getItem('portfolioInternalNavigation') === 'true';
+    
+    if (cameFromInternalNav) {
+      // Clear the flag and don't show animation
+      sessionStorage.removeItem('portfolioInternalNavigation');
+      return false;
+    }
+    
+    // If no internal navigation flag, this is a page load/reload - show animation
+    return true;
+  }
 
   readonly isAnimationFadingOut = computed(() => 
     this.animationFadingOut()

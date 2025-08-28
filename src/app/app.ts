@@ -7,13 +7,18 @@ import { LenisService } from './services/lenis-service';
   selector: 'app-root',
   imports: [RouterOutlet, Header],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
+
 })
 export class App {
-  constructor(private lenisService: LenisService) {}
+  constructor(
+    private lenisService: LenisService,
+  ) {}
   protected readonly title = signal('Portfolio');
 
   ngOnInit(): void {
     this.lenisService.init();
   }
+
+
 }

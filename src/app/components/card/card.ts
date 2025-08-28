@@ -1,5 +1,6 @@
 import { Component, input, inject, computed } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslationService } from '../../services/translation-service';
 
 /**
  * 🎯 CARD COMPONENT: Enhanced with Dual Action Pattern
@@ -18,6 +19,7 @@ import { Router } from '@angular/router';
 })
 export class Card {
   private readonly router = inject(Router);
+  private readonly translationService = inject(TranslationService);
 
   // ✅ EXISTING INPUTS: Maintain backward compatibility
   readonly title = input<string>('');
@@ -109,5 +111,9 @@ export class Card {
     }
     
     window.open(url, '_blank', 'noopener,noreferrer');
+  }
+
+  translate(key: string): string {
+    return this.translationService.translate(key);
   }
 }

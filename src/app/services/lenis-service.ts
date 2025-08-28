@@ -49,7 +49,6 @@ export class LenisService implements OnDestroy {
       this.isDragging = true;
       this.startY = e.clientY;
       this.startTop = parseFloat(thumb.style.top || '0');
-      document.body.style.userSelect = 'none';
     });
 
     document.addEventListener('mousemove', (e) => {
@@ -72,7 +71,6 @@ export class LenisService implements OnDestroy {
     document.addEventListener('mouseup', () => {
       if (this.isDragging) {
         this.isDragging = false;
-        document.body.style.userSelect = '';
       }
     });
   }
@@ -82,6 +80,16 @@ export class LenisService implements OnDestroy {
       this.lenis.destroy();
       this.lenis = null;
     }
+  }
+
+  reinitialize(): void {
+    if (!isPlatformBrowser(this.platformId)) return;
+    
+    // Small delay to ensure DOM is ready after route change
+    setTimeout(() => {
+      this.destroy();
+      this.init();
+    }, 50);
   }
 
   getLenis(): Lenis | null {

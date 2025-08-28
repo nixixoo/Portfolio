@@ -1,16 +1,16 @@
 <article 
-  class="grid grid-cols-1 sm:grid-cols-[minmax(120px,200px)_1fr] md:grid-cols-[minmax(200px,auto)_1fr] gap-3 sm:gap-4 p-3 sm:p-4 bg-purple 
+  class="grid grid-cols-1 sm:grid-cols-[minmax(100px,140px)_1fr] md:grid-cols-[minmax(120px,160px)_1fr] gap-3 sm:gap-4 p-3 sm:p-4 bg-purple 
          border border-yellow shadow-[4px_4px_0_0_var(--color-yellow)] 
          hover:shadow-[6px_6px_0_0_var(--color-yellow)] transition-shadow duration-200">
 
   <!-- Image Section: Enhanced with better fallback -->
-  <div class="h-24 sm:h-full flex items-center justify-center bg-purple border border-yellow min-h-[80px] sm:min-h-[120px] order-1 sm:order-none">
+  <div class="h-20 sm:h-full flex items-center justify-center bg-purple border border-yellow min-h-[80px] sm:min-h-[100px] max-h-[120px] order-1 sm:order-none">
     @if (imageUrl()) {
       <img [src]="imageUrl()" [alt]="title()" class="h-full w-auto object-cover" />
     } @else {
       <div class="text-center p-2 sm:p-4">
         <div class="font-pixel text-yellow text-base sm:text-lg mb-1">⚡</div>
-        <span class="font-pixel text-yellow text-xs">PROJECT</span>
+        <span class="font-pixel text-yellow text-xs">{{ translate('card.project') }}</span>
       </div>
     }
   </div>
@@ -46,7 +46,7 @@
           aria-label="View project details"
         >
           <span>📋</span>
-          <span>DETAILS</span>
+          <span>{{ translate('card.details') }}</span>
         </button>
       }
       
@@ -61,8 +61,8 @@
             aria-label="View source code on GitHub"
           >
             <span>📂</span>
-            <span class="hidden xs:inline sm:inline">CODE</span>
-            <span class="xs:hidden sm:hidden">CODE</span>
+            <span class="hidden xs:inline sm:inline">{{ translate('card.code') }}</span>
+            <span class="xs:hidden sm:hidden">{{ translate('card.code') }}</span>
           </button>
         }
         
@@ -75,8 +75,8 @@
             aria-label="View live demo"
           >
             <span>🚀</span>
-            <span class="hidden xs:inline sm:inline">LIVE</span>
-            <span class="xs:hidden sm:hidden">LIVE</span>
+            <span class="hidden xs:inline sm:inline">{{ translate('card.live') }}</span>
+            <span class="xs:hidden sm:hidden">{{ translate('card.live') }}</span>
           </button>
         }
       </div>

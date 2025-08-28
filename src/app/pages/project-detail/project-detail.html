@@ -1,7 +1,7 @@
-<main class="bg-purple min-h-screen text-white">
+<main class="bg-purple min-h-screen text-white animate-fade-in animate-duration-700">
     @if (project(); as proj) {
       <!-- Hero Section -->
-      <section class="relative pt-20">
+      <section class="relative pt-20 animate-slide-in-top animate-delay-300">
         <div class="max-w-4xl mx-auto px-4">
           
           <!-- Back Navigation -->
@@ -10,7 +10,7 @@
             class="font-pixel text-yellow hover:text-white transition-colors mb-8 flex items-center gap-2"
           >
             <span class="transition-transform group-hover:-translate-x-1">←</span>
-            Back to Portfolio
+            {{ translate('project.detail.backToPortfolio') }}
           </button>
   
           <!-- Project Header -->
@@ -26,12 +26,12 @@
             <!-- Status and Timeline -->
             <div class="flex justify-center items-center gap-6 mt-6">
               <div class="text-center">
-                <span class="font-pixel text-xs text-orange-light">STATUS</span>
-                <p class="font-inter text-white text-sm">{{ proj.status | titlecase }}</p>
+                <span class="font-pixel text-xs text-orange-light">{{ translate('project.detail.status') }}</span>
+                <p class="font-inter text-white text-sm">{{ translateStatus(proj.status) }}</p>
               </div>
               <div class="w-px h-8 bg-yellow/30"></div>
               <div class="text-center">
-                <span class="font-pixel text-xs text-orange-light">STARTED</span>
+                <span class="font-pixel text-xs text-orange-light">{{ translate('project.detail.started') }}</span>
                 <p class="font-inter text-white text-sm">{{ proj.startDate }}</p>
               </div>
             </div>
@@ -45,7 +45,7 @@
                 target="_blank"
                 class="font-pixel bg-yellow text-purple px-6 py-3 hover:-translate-y-1 transition-transform flex items-center gap-2"
               >
-                🚀 VIEW LIVE
+                🚀 {{ translate('project.detail.viewLive') }}
               </a>
             }
             @if (proj.githubUrl) {
@@ -54,23 +54,61 @@
                 target="_blank"
                 class="font-pixel border border-yellow text-yellow px-6 py-3 hover:bg-yellow hover:text-purple transition-colors flex items-center gap-2"
               >
-                📂 VIEW CODE
+                📂 {{ translate('project.detail.viewCode') }}
               </a>
             }
           </div>
+
+          <!-- Project Image with Click-to-Zoom Effect -->
+          @if (proj.imageUrl) {
+            <div class="mt-12">
+              <div class="max-w-2xl mx-auto">
+                <div class="relative overflow-hidden rounded-lg border border-yellow shadow-[8px_8px_0_0_var(--color-yellow)] 
+                           hover:shadow-[12px_12px_0_0_var(--color-yellow)] transition-shadow duration-300 group"
+                     [class.ring-2]="isImageZoomActive()"
+                     [class.ring-yellow]="isImageZoomActive()"
+                     [class.ring-opacity-50]="isImageZoomActive()">
+                  <img 
+                    [src]="proj.imageUrl" 
+                    [alt]="proj.title"
+                    (click)="onImageClick()"
+                    (mousemove)="onImageMouseMove($event)"
+                    (mouseleave)="onImageMouseLeave()"
+                    class="w-full h-auto transition-all duration-500 ease-out select-none"
+                    [class.cursor-zoom-in]="!isImageZoomActive()"
+                    [class.cursor-zoom-out]="isImageZoomActive()"
+                    [style.transform]="isImageZoomActive() ? 
+                      'scale(1.75 ) translate(' + 
+                      ((50 - imageMousePosition().x) * 0.3) + '%, ' + 
+                      ((50 - imageMousePosition().y) * 0.3) + '%)' : 
+                      'scale(1) translate(0%, 0%)'"
+                  />
+                  
+                  <!-- Indicador sutil de que se puede hacer click -->
+                  @if (!isImageZoomActive()) {
+                    <div class="absolute bottom-3 right-3 bg-black/60 backdrop-blur-sm rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                      <svg class="w-4 h-4 text-yellow" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
+                      </svg>
+                    </div>
+                  }
+                </div>
+              </div>
+            </div>
+          }
   
         </div>
       </section>
   
       <!-- Project Details Grid -->
-      <section class="py-16">
+      <section class="py-16 animate-slide-in-bottom animate-delay-500">
         <div class="max-w-6xl mx-auto px-4">
           <div class="grid lg:grid-cols-2 gap-12">
             
             <!-- Left Column: Description -->
             <div class="space-y-8">
               <div>
-                <h2 class="font-pixel text-orange-light text-xl mb-6">About This Project</h2>
+                <h2 class="font-pixel text-orange-light text-xl mb-6">{{ translate('project.detail.about') }}</h2>
                 <p class="font-inter text-white leading-relaxed text-base">
                   {{ proj.longDescription }}
                 </p>
@@ -78,7 +116,7 @@
   
               <!-- Key Features -->
               <div>
-                <h3 class="font-pixel text-orange-light text-lg mb-4">Key Features</h3>
+                <h3 class="font-pixel text-orange-light text-lg mb-4">{{ translate('project.detail.features') }}</h3>
                 <div class="space-y-3">
                   @for (feature of proj.features; track feature) {
                     <div class="flex items-start gap-3">
@@ -95,7 +133,7 @@
               
               <!-- Technology Stack -->
               <div>
-                <h3 class="font-pixel text-orange-light text-lg mb-4">Technology Stack</h3>
+                <h3 class="font-pixel text-orange-light text-lg mb-4">{{ translate('project.detail.techStack') }}</h3>
                 <div class="grid grid-cols-2 gap-2">
                   @for (tech of proj.technologies; track tech) {
                     <div class="font-pixel text-xs px-3 py-2 border border-orange-light text-orange-light text-center">
@@ -108,7 +146,7 @@
               <!-- Development Challenges -->
               @if (proj.challenges && proj.challenges.length > 0) {
                 <div>
-                  <h3 class="font-pixel text-orange-light text-lg mb-4">Development Challenges</h3>
+                  <h3 class="font-pixel text-orange-light text-lg mb-4">{{ translate('project.detail.challenges') }}</h3>
                   <div class="space-y-3">
                     @for (challenge of proj.challenges; track challenge) {
                       <div class="flex items-start gap-3">
@@ -129,7 +167,7 @@
       </section>
   
       <!-- Navigation Section -->
-      <section class="py-12">
+      <section class="py-12 animate-fade-in animate-delay-700">
         <div class="max-w-4xl mx-auto px-4">
           <div class="flex justify-between items-center">
             
@@ -180,7 +218,7 @@
             (click)="goBack()"
             class="font-pixel bg-yellow text-purple px-6 py-3 hover:-translate-y-1 transition-transform"
           >
-            Back to Portfolio
+            {{ translate('project.detail.backToPortfolio') }}
           </button>
         </div>
       </div>

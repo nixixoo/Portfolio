@@ -7,6 +7,15 @@ import {
 import express from 'express';
 import { join } from 'node:path';
 
+// Define prerender params for dynamic routes
+export function getPrerenderParams() {
+  return [
+    { id: 'portfolio' },
+    { id: 'mynotex' },
+    { id: 'abysstr' }
+  ];
+}
+
 const browserDistFolder = join(import.meta.dirname, '../browser');
 
 const app = express();

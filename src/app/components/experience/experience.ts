@@ -1,5 +1,6 @@
-import { Component, ChangeDetectionStrategy, signal, computed } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal, computed, inject } from '@angular/core';
 import { Card } from '../card/card';
+import { TranslationService } from '../../services/translation-service';
 
 interface ExperienceItem {
   readonly id: string;
@@ -20,6 +21,8 @@ interface ExperienceItem {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Experience {
+  private readonly translationService = inject(TranslationService);
+  
   // Estado local del componente usando signals
   private readonly experienceData = signal<readonly ExperienceItem[]>([
     {
@@ -32,11 +35,11 @@ export class Experience {
     }
   ]);
 
-  // ✅ Computed optimizado con transformaciones inmutables
+  // ✅ Computed optimizado con transformaciones inmutables con traducciones
   readonly experiences = computed(() => 
     this.experienceData().map(exp => ({
-      title: `${exp.position} at ${exp.company}`,
-      description: `${exp.period} - ${exp.description}`,
+      title: `${this.translate('experience.position')} at ${this.translate('experience.company')}`,
+      description: `${this.translate('experience.period')} - ${this.translate('experience.description')}`,
       tags: exp.technologies, // ✅ Ya es readonly string[]
       imageUrl: '' // Sin imagen para experiencia
     }))
@@ -53,4 +56,8 @@ export class Experience {
     const startYear = 2025; // Basado en los datos mock
     return currentYear - startYear;
   });
+
+  translate(key: string): string {
+    return this.translationService.translate(key);
+  }
 }
