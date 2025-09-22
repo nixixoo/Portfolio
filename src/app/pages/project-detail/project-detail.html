@@ -39,12 +39,12 @@
           </div>
   
           <!-- Live demo and code buttons -->
-          <div class="flex justify-center gap-4 mb-8">
+          <div class="flex flex-col sm:flex-row justify-center gap-4 mb-8">
             @if (proj.viewUrl) {
               <a 
                 [href]="proj.viewUrl" 
                 target="_blank"
-                class="font-pixel bg-yellow text-purple px-6 py-3 hover:-translate-y-1 transition-transform flex items-center gap-2"
+                class="font-pixel bg-yellow text-purple px-3 sm:px-6 py-3 hover:-translate-y-1 transition-transform flex items-center gap-2"
               >
                 🚀 {{ translate('project.detail.viewLive') }}
               </a>
@@ -53,9 +53,18 @@
               <a 
                 [href]="proj.githubUrl" 
                 target="_blank"
-                class="font-pixel border border-yellow text-yellow px-6 py-3 hover:bg-yellow hover:text-purple transition-colors flex items-center gap-2"
+                class="font-pixel border border-yellow text-yellow px-3 sm:px-6 py-3 hover:bg-yellow hover:text-purple transition-colors flex items-center gap-2"
               >
                 📂 {{ translate('project.detail.viewCode') }}
+              </a>
+            }
+            @if (proj.docLink) {
+              <a 
+                [href]="proj.docLink" 
+                target="_blank"
+                class="font-pixel border border-orange-light text-orange-light px-3 sm:px-5 py-3 hover:bg-orange-light hover:text-purple transition-colors flex items-center gap-2"
+              >
+                📋 {{ translate('project.detail.viewDoc') }}
               </a>
             }
           </div>

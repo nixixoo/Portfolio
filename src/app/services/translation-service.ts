@@ -100,7 +100,8 @@ export class TranslationService {
       
       // Project detail buttons
       'project.detail.viewLive': 'VIEW LIVE',
-      'project.detail.viewCode': 'VIEW CODE'
+      'project.detail.viewCode': 'VIEW CODE',
+      'project.detail.viewDoc': 'VIEW DOCUMENTATION'
     },
     es: {
       // Navigation
@@ -188,7 +189,8 @@ export class TranslationService {
       
       // Project detail buttons
       'project.detail.viewLive': 'VER PROYECTO',
-      'project.detail.viewCode': 'VER CÓDIGO'
+      'project.detail.viewCode': 'VER CÓDIGO',
+      'project.detail.viewDoc': 'VER DOCUMENTACIÓN'
     }
   };
 

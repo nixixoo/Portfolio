@@ -11,6 +11,7 @@ export interface ProjectData {
   readonly technologies: readonly string[]; // Technology stack
   readonly viewUrl?: string; // Live demo URL
   readonly githubUrl?: string; // GitHub repository URL
+  readonly docLink?: string; // Documentation URL (Google Drive, etc.)
   readonly status: 'completed' | 'in-progress' | 'planned'; // Project status
   readonly startDate: string; // Start date
   readonly features: readonly string[]; // Feature list
@@ -49,6 +50,7 @@ export class ProjectsService {
       technologies: ['Angular', 'TypeScript', 'Node.js', 'Express', 'TursoSQL'],
       viewUrl: 'https://mynotex.vercel.app',
       githubUrl: 'https://github.com/nixixoo/Notex',
+      docLink: 'https://docs.google.com/document/d/1uOP1I1lD0rnTnVe1Dkbo57M0HP507jqH5saFmSjhxRg/edit?usp=sharing',
       status: 'completed',
       startDate: '2025-02',
       category: 'web-app',
