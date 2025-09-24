@@ -71,6 +71,20 @@ export class ProjectsService {
       category: 'platform',
       features: [], 
       challenges: [] 
+    },
+    {
+      id: 'taskapi',
+      title: '', 
+      description: '', 
+      longDescription: '', 
+      imageUrl: '/images/Express.png',
+      technologies: ['Express.js', 'MongoDB', 'JWT', 'bcryptjs', 'RESTful API '],
+      githubUrl: 'https://github.com/nixixoo/ExpressTodoAPI',
+      status: 'completed',
+      startDate: '2025-09',
+      category: 'api',
+      features: [], 
+      challenges: [] 
     }
   ]);
 

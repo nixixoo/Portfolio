@@ -101,7 +101,23 @@ export class TranslationService {
       // Project detail buttons
       'project.detail.viewLive': 'VIEW LIVE',
       'project.detail.viewCode': 'VIEW CODE',
-      'project.detail.viewDoc': 'VIEW DOCUMENTATION'
+      'project.detail.viewDoc': 'VIEW DOCUMENTATION',
+      
+      // Project Details - Task API
+      'project.taskapi.title': 'Task API',
+      'project.taskapi.description': 'A production-ready REST API for task management with multi-user system.',
+      'project.taskapi.longDescription': 'A production-ready REST API for task management that demonstrates advanced Express.js capabilities beyond basic CRUD operations. The project showcases enterprise-level patterns including JWT authentication, user-specific data isolation, and comprehensive input validation.',
+      'project.taskapi.feature1': 'Multi-user system',
+      'project.taskapi.feature2': 'User-scoped data',
+      'project.taskapi.feature3': 'Advanced filtering',
+      'project.taskapi.feature4': 'Pagination system',
+      'project.taskapi.feature5': 'Comprehensive validation',
+      'project.taskapi.feature6': 'Centralized error handling',
+      'project.taskapi.feature7': 'Security-first approach',
+      'project.taskapi.challenge1': 'Authentication Flow',
+      'project.taskapi.challenge2': 'Data Isolation',
+      'project.taskapi.challenge3': 'Error Handling',
+      'project.taskapi.challenge4': 'Query Optimization'
     },
     es: {
       // Navigation
@@ -190,7 +206,23 @@ export class TranslationService {
       // Project detail buttons
       'project.detail.viewLive': 'VER PROYECTO',
       'project.detail.viewCode': 'VER CÓDIGO',
-      'project.detail.viewDoc': 'VER DOCUMENTACIÓN'
+      'project.detail.viewDoc': 'VER DOCUMENTACIÓN',
+      
+      // Project Details - Task API
+      'project.taskapi.title': 'Task API',
+      'project.taskapi.description': 'Una API REST lista para producción para gestión de tareas con sistema multi-usuario.',
+      'project.taskapi.longDescription': 'Una API REST lista para producción para gestión de tareas que demuestra capacidades avanzadas de Express.js más allá de operaciones CRUD básicas. El proyecto muestra patrones de nivel empresarial incluyendo autenticación JWT, aislamiento de datos específicos del usuario y validación integral.',
+      'project.taskapi.feature1': 'Sistema multi-usuario',
+      'project.taskapi.feature2': 'Datos con alcance de usuario',
+      'project.taskapi.feature3': 'Filtrado avanzado',
+      'project.taskapi.feature4': 'Sistema de paginación',
+      'project.taskapi.feature5': 'Validación integral',
+      'project.taskapi.feature6': 'Manejo centralizado de errores',
+      'project.taskapi.feature7': 'Enfoque de seguridad primero',
+      'project.taskapi.challenge1': 'Flujo de Autenticación',
+      'project.taskapi.challenge2': 'Aislamiento de Datos',
+      'project.taskapi.challenge3': 'Manejo de Errores',
+      'project.taskapi.challenge4': 'Optimización de Consultas'
     }
   };
 
