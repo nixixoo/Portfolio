@@ -23,7 +23,7 @@ export class TranslationService {
       
       // Hero Section - keeping exact text
       'hero.name': 'Nicolás Aliaga',
-      'hero.title': 'Computer Engineer',
+      'hero.title': 'Software Engineer',
       
       // About Section - keeping exact text
       'about.title': 'About Me',
@@ -69,6 +69,33 @@ export class TranslationService {
       'project.abysstr.challenge1': 'Implementing search user system',
       'project.abysstr.challenge2': 'Creating intuitive UX for user interactions',
       'project.abysstr.challenge3': 'Implementing authentication system with Firebase',
+
+       // Project Details - Task API
+      'project.taskapi.title': 'Task API',
+      'project.taskapi.description': 'A production-ready REST API for task management with multi-user system.',
+      'project.taskapi.longDescription': 'A production-ready REST API for task management that demonstrates advanced Express.js capabilities beyond basic CRUD operations. The project showcases enterprise-level patterns including JWT authentication, user-specific data isolation, and comprehensive input validation.',
+      'project.taskapi.feature1': 'Multi-user system',
+      'project.taskapi.feature2': 'User-scoped data',
+      'project.taskapi.feature3': 'Advanced filtering',
+      'project.taskapi.feature4': 'Pagination system',
+      'project.taskapi.feature5': 'Comprehensive validation',
+      'project.taskapi.feature6': 'Centralized error handling',
+      'project.taskapi.feature7': 'Security-first approach',
+      'project.taskapi.challenge1': 'Authentication Flow',
+      'project.taskapi.challenge2': 'Data Isolation',
+      'project.taskapi.challenge3': 'Error Handling',
+      'project.taskapi.challenge4': 'Query Optimization',
+
+      // Project Details - Library Management System
+      'project.library-management-system.title': 'Library Management System',
+      'project.library-management-system.description': 'A simple and complete library management system using PostgreSQL.',
+      'project.library-management-system.longDescription': 'PostgreSQL-based library management system demonstrating advanced database design and SQL programming. Features normalized schema (3NF), automated workflows with triggers, stored procedures for business logic, role-based access control, and performance optimization. Includes 10 tables, complex analytical queries, and comprehensive backup strategy for efficient library operations.',
+      'project.library-management-system.feature1': 'Automated workflows with triggers and 6 stored procedures',
+      'project.library-management-system.feature2': 'Role-based security with 3 access levels (admin, librarian, read-only)',
+      'project.library-management-system.feature3': 'Performance optimization with 8 strategic indexes and complex queries',
+      'project.library-management-system.challenge1': 'Designing normalized database schema (3NF) with proper foreign key constraints',
+      'project.library-management-system.challenge2': 'Implementing trigger automation for data consistency and fine generation',
+      'project.library-management-system.challenge3': 'Balancing security through role-based access control with operational flexibility',
       
       // Experience Section
       'experience.title': 'Experience',
@@ -103,21 +130,7 @@ export class TranslationService {
       'project.detail.viewCode': 'VIEW CODE',
       'project.detail.viewDoc': 'VIEW DOCUMENTATION',
       
-      // Project Details - Task API
-      'project.taskapi.title': 'Task API',
-      'project.taskapi.description': 'A production-ready REST API for task management with multi-user system.',
-      'project.taskapi.longDescription': 'A production-ready REST API for task management that demonstrates advanced Express.js capabilities beyond basic CRUD operations. The project showcases enterprise-level patterns including JWT authentication, user-specific data isolation, and comprehensive input validation.',
-      'project.taskapi.feature1': 'Multi-user system',
-      'project.taskapi.feature2': 'User-scoped data',
-      'project.taskapi.feature3': 'Advanced filtering',
-      'project.taskapi.feature4': 'Pagination system',
-      'project.taskapi.feature5': 'Comprehensive validation',
-      'project.taskapi.feature6': 'Centralized error handling',
-      'project.taskapi.feature7': 'Security-first approach',
-      'project.taskapi.challenge1': 'Authentication Flow',
-      'project.taskapi.challenge2': 'Data Isolation',
-      'project.taskapi.challenge3': 'Error Handling',
-      'project.taskapi.challenge4': 'Query Optimization'
+     
     },
     es: {
       // Navigation
@@ -174,6 +187,33 @@ export class TranslationService {
       'project.abysstr.challenge1': 'Implementar sistema de búsqueda de usuarios',
       'project.abysstr.challenge2': 'Crear UX intuitiva para interacciones de usuario',
       'project.abysstr.challenge3': 'Implementar sistema de autenticación con Firebase',
+
+      // Project Details - Task API
+      'project.taskapi.title': 'Task API',
+      'project.taskapi.description': 'Una API REST lista para producción para gestión de tareas con sistema multi-usuario.',
+      'project.taskapi.longDescription': 'Una API REST lista para producción para gestión de tareas que demuestra capacidades avanzadas de Express.js más allá de operaciones CRUD básicas. El proyecto muestra patrones de nivel empresarial incluyendo autenticación JWT, aislamiento de datos específicos del usuario y validación integral.',
+      'project.taskapi.feature1': 'Sistema multi-usuario',
+      'project.taskapi.feature2': 'Datos con alcance de usuario',
+      'project.taskapi.feature3': 'Filtrado avanzado',
+      'project.taskapi.feature4': 'Sistema de paginación',
+      'project.taskapi.feature5': 'Validación integral',
+      'project.taskapi.feature6': 'Manejo centralizado de errores',
+      'project.taskapi.feature7': 'Enfoque de seguridad primero',
+      'project.taskapi.challenge1': 'Flujo de Autenticación',
+      'project.taskapi.challenge2': 'Aislamiento de Datos',
+      'project.taskapi.challenge3': 'Manejo de Errores',
+      'project.taskapi.challenge4': 'Optimización de Consultas',
+
+      // Project Details - Library Management System
+      'project.library-management-system.title': 'Sistema de Gestión de Bibliotecas',
+      'project.library-management-system.description': 'Un sistema simple y completo de gestión de bibliotecas usando PostgreSQL.',
+      'project.library-management-system.longDescription': 'Sistema de gestión de bibliotecas basado en PostgreSQL que demuestra diseño avanzado de bases de datos y programación SQL. Incluye esquema normalizado (3NF), flujos de trabajo automatizados con triggers, procedimientos almacenados para lógica de negocio, control de acceso basado en roles y optimización de rendimiento. Incluye 10 tablas, consultas analíticas complejas y estrategia integral de respaldo para operaciones eficientes de la biblioteca.',
+      'project.library-management-system.feature1': 'Flujos de trabajo automatizados con triggers y 6 procedimientos almacenados',
+      'project.library-management-system.feature2': 'Control de acceso basado en roles',
+      'project.library-management-system.feature3': 'Optimización de rendimiento',
+      'project.library-management-system.challenge1': 'Diseño de esquema normalizado (3NF) con restricciones de clave foránea apropiadas',
+      'project.library-management-system.challenge2': 'Implementación de flujos de trabajo automatizados con triggers',
+      'project.library-management-system.challenge3': 'Ajuste de seguridad a través de control de acceso basado en roles con flexibilidad operativa',
       
       // Experience Section
       'experience.title': 'Experiencia',
@@ -208,21 +248,6 @@ export class TranslationService {
       'project.detail.viewCode': 'VER CÓDIGO',
       'project.detail.viewDoc': 'VER DOCUMENTACIÓN',
       
-      // Project Details - Task API
-      'project.taskapi.title': 'Task API',
-      'project.taskapi.description': 'Una API REST lista para producción para gestión de tareas con sistema multi-usuario.',
-      'project.taskapi.longDescription': 'Una API REST lista para producción para gestión de tareas que demuestra capacidades avanzadas de Express.js más allá de operaciones CRUD básicas. El proyecto muestra patrones de nivel empresarial incluyendo autenticación JWT, aislamiento de datos específicos del usuario y validación integral.',
-      'project.taskapi.feature1': 'Sistema multi-usuario',
-      'project.taskapi.feature2': 'Datos con alcance de usuario',
-      'project.taskapi.feature3': 'Filtrado avanzado',
-      'project.taskapi.feature4': 'Sistema de paginación',
-      'project.taskapi.feature5': 'Validación integral',
-      'project.taskapi.feature6': 'Manejo centralizado de errores',
-      'project.taskapi.feature7': 'Enfoque de seguridad primero',
-      'project.taskapi.challenge1': 'Flujo de Autenticación',
-      'project.taskapi.challenge2': 'Aislamiento de Datos',
-      'project.taskapi.challenge3': 'Manejo de Errores',
-      'project.taskapi.challenge4': 'Optimización de Consultas'
     }
   };
 

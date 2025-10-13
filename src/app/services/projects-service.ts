@@ -16,7 +16,7 @@ export interface ProjectData {
   readonly startDate: string; // Start date
   readonly features: readonly string[]; // Feature list
   readonly challenges?: readonly string[]; // Development challenges
-  readonly category: 'web-app' | 'portfolio' | 'platform' | 'api'; // Project category
+  readonly category: 'web-app' | 'portfolio' | 'platform' | 'api' | 'database'; // Project category
 }
 
 // Service for managing project data with translations
@@ -85,6 +85,20 @@ export class ProjectsService {
       category: 'api',
       features: [], 
       challenges: [] 
+    },
+    {
+      id: 'library-management-system',
+      title: '', 
+      description: '',
+      longDescription: '',
+      imageUrl: '/images/PostgreSQL.png',
+      technologies: ['PostgreSQL', 'pgAdmin 4', 'Database Management'],
+      githubUrl: 'https://github.com/nixixoo/PostgreSQL-Library-Example',
+      status: 'completed',
+      startDate: '2025-10',
+      category: 'database',
+      features: [], 
+      challenges: []
     }
   ]);
 
