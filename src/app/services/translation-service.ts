@@ -30,6 +30,12 @@ export class TranslationService {
       'about.intro': 'Hello! I can use AI to code, but no for my own About Me. I\'m Nicolás Aliaga, a Computer Engineer who wants to create and serve to help the people reach their objectives, mainly focused on bring efficient solutions, as for my the most valuable thing is to save time to the users.',
       'about.description': 'I\'m heavily focused on web development with Angular, working on create code scalable and maintainable. My objective is to create safe, fast and responsive web applications to reach the goals of the business.',
       'about.techStack': 'Technology Stack',
+      'about.filterByCategory': 'Filter by Category',
+      
+      // Category filters
+      'category.all': 'All',
+      'category.web': 'Web Development',
+      'category.data': 'Data Analysis',
       
       // Projects Section - keeping exact text
       'projects.title': 'Personal Projects',
@@ -97,6 +103,14 @@ export class TranslationService {
       'project.library-management-system.challenge2': 'Implementing trigger automation for data consistency and fine generation',
       'project.library-management-system.challenge3': 'Balancing security through role-based access control with operational flexibility',
       
+      // Project Details - Data Analysis Placeholder
+      'project.data-analysis-placeholder.title': 'Data Analysis Project',
+      'project.data-analysis-placeholder.description': 'Coming soon - Data analysis project with Python and Power BI.',
+      'project.data-analysis-placeholder.longDescription': 'This project will showcase data analysis capabilities using modern tools and techniques. Stay tuned for more details.',
+      'project.data-analysis-placeholder.feature1': 'Data visualization with Power BI',
+      'project.data-analysis-placeholder.feature2': 'Data processing with Python and Pandas',
+      'project.data-analysis-placeholder.feature3': 'Excel integration for reporting',
+      
       // Experience Section
       'experience.title': 'Experience',
       'experience.empty.title': 'No experience data available',
@@ -148,6 +162,12 @@ export class TranslationService {
       'about.intro': '¡Hola! Podré usar IA para programar, pero no para mi propio Sobre mí. Soy Nicolás Aliaga, un Ingeniero en Informática que quiere crear y servir para ayudar a las personas a alcanzar sus objetivos, principalmente enfocado en brindar soluciones eficientes, ya que para mí lo más valioso es ahorrar tiempo a los usuarios.',
       'about.description': 'Estoy muy enfocado en el desarrollo web con Angular, trabajando en crear código escalable y mantenible. Mi objetivo es crear aplicaciones web seguras, rápidas y responsivas para alcanzar los objetivos del negocio.',
       'about.techStack': 'Stack Tecnológico',
+      'about.filterByCategory': 'Filtrar por Categoría',
+      
+      // Category filters
+      'category.all': 'Todos',
+      'category.web': 'Desarrollo Web',
+      'category.data': 'Análisis de Datos',
       
       // Projects Section
       'projects.title': 'Proyectos Personales',
@@ -214,6 +234,14 @@ export class TranslationService {
       'project.library-management-system.challenge1': 'Diseño de esquema normalizado (3NF) con restricciones de clave foránea apropiadas',
       'project.library-management-system.challenge2': 'Implementación de flujos de trabajo automatizados con triggers',
       'project.library-management-system.challenge3': 'Ajuste de seguridad a través de control de acceso basado en roles con flexibilidad operativa',
+      
+      // Project Details - Data Analysis Placeholder
+      'project.data-analysis-placeholder.title': 'Proyecto de Análisis de Datos',
+      'project.data-analysis-placeholder.description': 'Próximamente - Proyecto de análisis de datos con Python y Power BI.',
+      'project.data-analysis-placeholder.longDescription': 'Este proyecto mostrará capacidades de análisis de datos utilizando herramientas y técnicas modernas. Mantente atento para más detalles.',
+      'project.data-analysis-placeholder.feature1': 'Visualización de datos con Power BI',
+      'project.data-analysis-placeholder.feature2': 'Procesamiento de datos con Python y Pandas',
+      'project.data-analysis-placeholder.feature3': 'Integración con Excel para reportes',
       
       // Experience Section
       'experience.title': 'Experiencia',

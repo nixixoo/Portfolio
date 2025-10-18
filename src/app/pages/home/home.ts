@@ -34,6 +34,8 @@ export class Home implements OnInit {
   
   private readonly animationCompleted = signal(false); // Entry animation completion state
   private readonly animationFadingOut = signal(false); // Animation fade out state
+  private readonly activeCategory = signal<'web' | 'data'>('web'); // Active project category filter
+  private readonly isTransitioning = signal(false); // Category transition animation state
 
 
   // Initialize smooth scrolling on component load
@@ -45,9 +47,29 @@ export class Home implements OnInit {
   translate(key: string): string {
     return this.translationService.translate(key);
   }
+  // Filter projects based on active category
+  private readonly filteredProjects = computed(() => {
+    const category = this.activeCategory();
+    const allProjects = this.projectsService.translatedProjects();
+    
+    if (category === 'web') {
+      return allProjects.filter(p => 
+        p.category === 'web-app' || p.category === 'portfolio' || p.category === 'platform'
+      );
+    }
+    
+    if (category === 'data') {
+      return allProjects.filter(p => 
+        p.category === 'data-analysis'
+      );
+    }
+    
+    return allProjects;
+  });
+
   // Transform projects data for card display
   readonly projectCards = computed(() => 
-    this.projectsService.translatedProjects().map(project => ({
+    this.filteredProjects().map(project => ({
       title: project.title,
       description: project.description,
       tags: project.technologies,
@@ -66,6 +88,8 @@ export class Home implements OnInit {
 
   // Get unique technologies with sanitized SVG icons
   readonly uniqueTechnologies = computed((): readonly TechWithIcon[] => {
+    const category = this.activeCategory();
+    
     const rawTechData = [ // Raw technology data with SVG icons
       {
         name: 'Angular',
@@ -100,6 +124,14 @@ export class Home implements OnInit {
         name: 'SQL Server',
         rawSvg: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8a2 2 0 0 1 2 2v4a2 2 0 1 1-4 0v-4a2 2 0 0 1 2-2m5 0v8h4m-8-1l1 1M3 15a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1"/></svg>`
       },
+            {
+        name: 'PostgreSQL',
+        rawSvg: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M17.128 2.513c-1.368.091-2.716.444-3.817 1.112a11.2 11.2 0 0 0-1.441.967c-.11.09-.2.18-.29.27c-.09-.09-.18-.18-.29-.27a11.2 11.2 0 0 0-1.441-.967C8.738 2.957 7.39 2.604 6.022 2.513c-1.368-.091-2.716.18-3.817.722c-.55.271-1.01.632-1.351 1.083c-.341.451-.562.993-.562 1.625v9.514c0 .632.221 1.174.562 1.625c.341.451.801.812 1.351 1.083c1.101.542 2.449.813 3.817.722c1.368-.091 2.716-.444 3.817-1.112c.55-.334 1.01-.722 1.351-1.174c.341.452.801.84 1.351 1.174c1.101.668 2.449 1.021 3.817 1.112c1.368.091 2.716-.18 3.817-.722c.55-.271 1.01-.632 1.351-1.083c.341-.451.562-.993.562-1.625V5.943c0-.632-.221-1.174-.562-1.625c-.341-.451-.801-.812-1.351-1.083c-1.101-.542-2.449-.813-3.817-.722M12 5.312c.11.09.2.18.29.27c.09.09.18.18.29.27v11.296c-.11-.09-.2-.18-.29-.27c-.09-.09-.18-.18-.29-.27z"/></svg>`
+      },
+      {
+        name: 'MySQL',
+        rawSvg: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M16.405 5.501c-.115 0-.193.014-.274.033v.013h.014c.054.104.146.18.214.273c.054.107.1.214.154.32l.014-.015c.094-.066.14-.172.14-.333c-.04-.047-.046-.094-.08-.14c-.04-.067-.126-.1-.18-.153zM5.77 18.695h-.927a50.854 50.854 0 0 0-.27-4.41h-.008l-1.41 4.41H2.45l-1.4-4.41h-.01a72.892 72.892 0 0 0-.195 4.41H0c.055-1.966.192-3.81.41-5.53h1.15l1.335 4.064h.008l1.347-4.064h1.095c.242 2.015.384 3.86.428 5.53zm4.017-4.08c-.378 2.045-.876 3.533-1.492 4.46c-.482.716-1.01 1.073-1.583 1.073c-.153 0-.34-.046-.566-.138v-.494c.11.017.24.026.386.026c.268 0 .483-.075.647-.222c.197-.18.295-.382.295-.605c0-.155-.077-.47-.23-.944L6.23 14.615h.91l.727 2.36c.164.536.233.91.205 1.123c.4-1.064.678-2.227.835-3.483zm12.325 4.08h-2.63v-5.53h.885v4.85h1.745zm-3.32.135l-1.016-.5c.09-.076.177-.158.255-.25c.433-.506.648-1.258.648-2.253c0-1.83-.718-2.746-2.155-2.746c-.704 0-1.254.232-1.65.697c-.43.508-.646 1.256-.646 2.245c0 .972.19 1.686.574 2.14c.35.41.877.615 1.583.615c.264 0 .506-.033.725-.098l1.325.772l.36-.622zM15.5 17.588c-.225-.36-.337-.94-.337-1.736c0-1.393.424-2.09 1.27-2.09c.443 0 .77.167.977.5c.224.362.336.936.336 1.723c0 1.404-.424 2.108-1.27 2.108c-.445 0-.77-.167-.978-.5zm-1.658-.425c0 .47-.172.856-.516 1.156c-.344.3-.803.45-1.384.45c-.543 0-1.064-.172-1.573-.515l.237-.476c.438.22.833.328 1.19.328c.332 0 .593-.073.783-.22a.754.754 0 0 0 .3-.615c0-.33-.23-.61-.648-.845c-.388-.213-1.163-.657-1.163-.657c-.422-.307-.632-.636-.632-1.177c0-.45.157-.81.47-1.085c.315-.278.72-.415 1.22-.415c.512 0 .98.136 1.4.41l-.213.476a2.726 2.726 0 0 0-1.064-.23c-.283 0-.502.068-.654.206a.685.685 0 0 0-.248.524c0 .328.234.61.666.85c.393.215 1.187.67 1.187.67c.433.305.648.63.648 1.168zm9.382-5.852c-.535-.014-.95.04-1.297.188c-.1.04-.26.04-.274.167c.055.053.063.14.11.214c.08.134.218.313.346.407c.14.11.28.216.427.31c.26.16.555.255.81.416c.145.094.293.213.44.313c.073.05.12.14.214.172v-.02c-.046-.06-.06-.147-.105-.214c-.067-.067-.134-.127-.2-.193a3.223 3.223 0 0 0-.695-.675c-.214-.146-.682-.35-.77-.595l-.013-.014c.146-.013.32-.066.46-.106c.227-.06.435-.047.67-.106c.106-.027.213-.06.32-.094v-.06c-.12-.12-.21-.283-.334-.395a8.867 8.867 0 0 0-1.104-.823c-.21-.134-.476-.22-.697-.334c-.08-.04-.214-.06-.26-.127c-.12-.146-.19-.34-.275-.514a17.69 17.69 0 0 1-.547-1.163c-.12-.262-.193-.523-.34-.763c-.69-1.137-1.437-1.826-2.586-2.5c-.247-.14-.543-.2-.856-.274c-.167-.008-.334-.02-.5-.027c-.11-.047-.216-.174-.31-.235c-.38-.24-1.364-.76-1.644-.072c-.18.434.267.862.422 1.082c.115.153.26.328.34.5c.047.116.06.235.107.356c.106.294.207.622.347.897c.073.14.153.287.247.413c.054.073.146.107.167.227c-.094.136-.1.334-.154.5c-.24.757-.146 1.693.194 2.25c.107.166.362.534.703.393c.3-.12.234-.5.32-.835c.02-.08.007-.133.048-.187v.015c.094.188.188.367.274.555c.206.328.566.668.867.895c.16.12.287.328.487.402v-.02h-.015c-.043-.058-.1-.086-.154-.133a3.445 3.445 0 0 1-.35-.4a8.76 8.76 0 0 1-.747-1.218c-.11-.21-.202-.436-.29-.643c-.04-.08-.04-.2-.107-.24c-.1.146-.247.273-.32.453c-.127.288-.14.642-.188 1.01c-.027.007-.014 0-.027.014c-.214-.052-.287-.274-.367-.46c-.2-.475-.233-1.238-.06-1.785c.047-.14.247-.582.167-.716c-.042-.127-.174-.2-.247-.303a2.478 2.478 0 0 1-.24-.427c-.16-.374-.24-.788-.414-1.162c-.08-.173-.22-.354-.334-.513c-.127-.18-.267-.307-.368-.52c-.033-.073-.08-.194-.027-.274c.014-.054.042-.075.094-.09c.088-.072.335.022.422.062c.247.1.455.194.662.334c.094.066.195.193.315.226h.14c.214.047.455.014.655.073c.355.114.675.28.962.46a5.953 5.953 0 0 1 2.085 2.286c.08.154.115.295.188.455c.14.33.313.663.455.982c.14.315.275.636.476.897c.1.14.502.213.682.286c.133.06.34.115.46.188c.23.14.454.3.67.454c.11.076.443.243.463.378z"/></svg>`
+      },
       {
         name: 'Firebase',
         rawSvg: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="m20 18.69l-7.3 4.05q-.75.39-1.5 0L4 18.69L17.05 5.54l.35-.1c.3 0 .47.13.5.4zM9.35 5.74L4.8 13.29L6.7 1.34c.03-.27.2-.4.5-.4c.2 0 .33.06.4.25l2.15 3.95zM13.85 7L4.3 16.59l7.25-12.3c.1-.2.25-.29.45-.29s.33.09.4.29z"/></svg>`
@@ -117,11 +149,28 @@ export class Home implements OnInit {
       {
         name: 'RESTful API',
         rawSvg: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="m12 14l-2-2l2-2l2 2zM9.875 8.125l-2.5-2.5L12 1l4.625 4.625l-2.5 2.5L12 6zm-4.25 8.5L1 12l4.625-4.625l2.5 2.5L6 12l2.125 2.125zm12.75 0l-2.5-2.5L18 12l-2.125-2.125l2.5-2.5L23 12zM12 23l-4.625-4.625l2.5-2.5L12 18l2.125-2.125l2.5 2.5z"/></svg>`
+      },
+      {
+        name: 'Excel',
+        rawSvg: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zm-1 13l-2.5-3.5L8 15H6l3.5-5L6 5h2l2.5 3.5L13 5h2l-3.5 5l3.5 5zm1-8V3.5L19.5 9z"/></svg>`
+      },
+      {
+        name: 'Power BI',
+        rawSvg: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M10 2h4v20h-4zm-6 6h4v12H4zm12 4h4v8h-4z"/></svg>`
       }
     ];
 
+    // Define which technologies belong to each category
+    const webTechs = ['Angular', 'TailwindCSS', 'TypeScript', 'Flask', 'Node.js', 'Express', 'SQL Server', 'PostgreSQL', 'MySQL', 'Firebase', 'MongoDB', 'Git', 'RESTful API'];
+    const dataTechs = ['PostgreSQL', 'MySQL', 'SQL Server', 'Excel', 'Power BI'];
+    
+    // Filter technologies based on active category
+    const filteredTechData = category === 'web' 
+      ? rawTechData.filter(tech => webTechs.includes(tech.name))
+      : rawTechData.filter(tech => dataTechs.includes(tech.name));
+    
     // Sanitize SVG content for safe display
-    return rawTechData.map(tech => ({
+    return filteredTechData.map(tech => ({
       name: tech.name,
       rawSvg: tech.rawSvg,
       sanitizedIcon: this.sanitizer.bypassSecurityTrustHtml(tech.rawSvg)
@@ -167,6 +216,34 @@ export class Home implements OnInit {
     setTimeout(() => {
       this.animationCompleted.set(true);
     }, 300);
+  }
+
+  // Change active category filter with animation
+  setCategory(category: 'web' | 'data'): void {
+    if (this.activeCategory() === category) return; // Don't animate if same category
+    
+    // Start fade out
+    this.isTransitioning.set(true);
+    
+    // Wait for fade out, then change category and fade in
+    setTimeout(() => {
+      this.activeCategory.set(category);
+      
+      // End transition after fade in completes
+      setTimeout(() => {
+        this.isTransitioning.set(false);
+      }, 200);
+    }, 200);
+  }
+
+  // Check if category is active
+  isCategoryActive(category: 'web' | 'data'): boolean {
+    return this.activeCategory() === category;
+  }
+
+  // Expose transition state for template
+  get transitioning(): boolean {
+    return this.isTransitioning();
   }
 }
 

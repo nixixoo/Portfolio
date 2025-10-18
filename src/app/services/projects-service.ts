@@ -16,7 +16,7 @@ export interface ProjectData {
   readonly startDate: string; // Start date
   readonly features: readonly string[]; // Feature list
   readonly challenges?: readonly string[]; // Development challenges
-  readonly category: 'web-app' | 'portfolio' | 'platform' | 'api' | 'database'; // Project category
+  readonly category: 'web-app' | 'portfolio' | 'platform' | 'api' | 'database' | 'data-analysis'; // Project category
 }
 
 // Service for managing project data with translations
@@ -82,7 +82,7 @@ export class ProjectsService {
       githubUrl: 'https://github.com/nixixoo/ExpressTodoAPI',
       status: 'completed',
       startDate: '2025-09',
-      category: 'api',
+      category: 'web-app',
       features: [], 
       challenges: [] 
     },
@@ -96,7 +96,20 @@ export class ProjectsService {
       githubUrl: 'https://github.com/nixixoo/PostgreSQL-Library-Example',
       status: 'completed',
       startDate: '2025-10',
-      category: 'database',
+      category: 'web-app',
+      features: [], 
+      challenges: []
+    },
+    {
+      id: 'data-analysis-placeholder',
+      title: '', 
+      description: '',
+      longDescription: '',
+      imageUrl: '/images/DataAnalysis.png',
+      technologies: ['Python', 'Pandas', 'Excel', 'Power BI'],
+      status: 'planned',
+      startDate: '2025-11',
+      category: 'data-analysis',
       features: [], 
       challenges: []
     }
