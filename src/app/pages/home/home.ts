@@ -232,6 +232,12 @@ export class Home implements OnInit {
       // End transition after fade in completes
       setTimeout(() => {
         this.isTransitioning.set(false);
+        
+        // Force Lenis to recalculate scroll limits after content changes
+        this.lenisService.resize();
+        
+        // Smooth scroll to projects section for better UX
+        this.lenisService.scrollTo('#projects', { offset: -100, duration: 1 });
       }, 200);
     }, 200);
   }

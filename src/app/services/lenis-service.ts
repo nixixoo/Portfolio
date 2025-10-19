@@ -107,6 +107,20 @@ export class LenisService implements OnDestroy {
     return this.lenis;
   }
 
+  // Force Lenis to recalculate scroll limits (useful when content height changes)
+  resize(): void {
+    if (this.lenis) {
+      this.lenis.resize();
+    }
+  }
+
+  // Scroll to a specific element or position
+  scrollTo(target: string | number, options?: { offset?: number; duration?: number; immediate?: boolean }): void {
+    if (this.lenis) {
+      this.lenis.scrollTo(target, options);
+    }
+  }
+
   // Clean up on service destruction
   ngOnDestroy(): void {
     this.destroy();
