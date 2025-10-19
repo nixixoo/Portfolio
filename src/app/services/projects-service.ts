@@ -27,7 +27,7 @@ export class ProjectsService {
   // Project data stored in signal for reactivity
   private readonly projectsState = signal<readonly ProjectData[]>([
     {
-      id: 'portfolio',
+      id: 'Portfolio',
       title: '', 
       description: '', 
       longDescription: '', 
@@ -42,7 +42,7 @@ export class ProjectsService {
       challenges: [] 
     },
     {
-      id: 'mynotex',
+      id: 'My Notex',
       title: '', 
       description: '',  
       longDescription: '', 
@@ -58,7 +58,7 @@ export class ProjectsService {
       challenges: [] 
     },
     {
-      id: 'abysstr',
+      id: 'Abyss Team Request',
       title: '', 
       description: '', 
       longDescription: '', 
@@ -73,7 +73,7 @@ export class ProjectsService {
       challenges: [] 
     },
     {
-      id: 'taskapi',
+      id: 'Task API',
       title: '', 
       description: '', 
       longDescription: '', 
@@ -87,7 +87,7 @@ export class ProjectsService {
       challenges: [] 
     },
     {
-      id: 'library-management-system',
+      id: 'Library Management System',
       title: '', 
       description: '',
       longDescription: '',
@@ -101,14 +101,15 @@ export class ProjectsService {
       challenges: []
     },
     {
-      id: 'data-analysis-placeholder',
+      id: 'Data Analysis Sales Superstore',
       title: '', 
       description: '',
       longDescription: '',
-      imageUrl: '/images/DataAnalysis.png',
-      technologies: ['Python', 'Pandas', 'Excel', 'Power BI'],
-      status: 'planned',
-      startDate: '2025-11',
+      imageUrl: '/images/Superstore.png',
+      docLink: 'https://docs.google.com/document/d/1xZBb7xqdBbnLTJLky7xmXBouSwy3bP5_n8wgFqUZrt8/edit?usp=sharing',
+      technologies: ['Power BI'],
+      status: 'completed',
+      startDate: '2025-10',
       category: 'data-analysis',
       features: [], 
       challenges: []

@@ -104,12 +104,15 @@ export class TranslationService {
       'project.library-management-system.challenge3': 'Balancing security through role-based access control with operational flexibility',
       
       // Project Details - Data Analysis Placeholder
-      'project.data-analysis-placeholder.title': 'Data Analysis Project',
-      'project.data-analysis-placeholder.description': 'Coming soon - Data analysis project with Python and Power BI.',
-      'project.data-analysis-placeholder.longDescription': 'This project will showcase data analysis capabilities using modern tools and techniques. Stay tuned for more details.',
-      'project.data-analysis-placeholder.feature1': 'Data visualization with Power BI',
-      'project.data-analysis-placeholder.feature2': 'Data processing with Python and Pandas',
-      'project.data-analysis-placeholder.feature3': 'Excel integration for reporting',
+      'project.data-analysis-superstore.title': 'Data Analysis Sales Superstore',
+      'project.data-analysis-superstore.description': 'A dashboard interactive complete of Business Intelligence in Power BI for sales analysis.',
+      'project.data-analysis-superstore.longDescription': 'Dashboard of Business Intelligence based on Power BI that demonstrates professional data analysis from exploration to visualization. Includes cleaning and validation of 9,800 transactions, dimensional model design (Star Schema) with 5 related tables, 7 KPIs with DAX formulas, 4 interactive pages with 11+ visualizations and technical documentation. Implements data transformations with Power Query, 1:N relationships correctly established, temporal and geographic analysis, customer segmentation and detection of seasonal patterns for commercial optimization.',
+      'project.data-analysis-superstore.feature1': 'Dimensional model (Star Schema) with 1 Fact Table and 4 Dimension Tables',
+      'project.data-analysis-superstore.feature2': '7 KPIs defined with DAX formulas (Total Sales, Average Ticket, Unique Customers, etc.)',
+      'project.data-analysis-superstore.feature3': 'Advanced visualizations: cards, trend lines, distribution graphs, geographic maps and dynamic tables',
+      'project.data-analysis-superstore.challenge1': 'Data cleaning and validation: correction of import errors (decimal separator), elimination of duplicates in dimensions',
+      'project.data-analysis-superstore.challenge2': 'Relationship design: Star Schema structure with 1:N relationships correctly established, ensuring referential integrity',
+      'project.data-analysis-superstore.challenge3': 'Multidimensional analysis: integration of analysis by region, product, customer and temporal period in a coherent dashboard',
       
       // Experience Section
       'experience.title': 'Experience',
@@ -236,13 +239,16 @@ export class TranslationService {
       'project.library-management-system.challenge3': 'Ajuste de seguridad a través de control de acceso basado en roles con flexibilidad operativa',
       
       // Project Details - Data Analysis Placeholder
-      'project.data-analysis-placeholder.title': 'Proyecto de Análisis de Datos',
-      'project.data-analysis-placeholder.description': 'Próximamente - Proyecto de análisis de datos con Python y Power BI.',
-      'project.data-analysis-placeholder.longDescription': 'Este proyecto mostrará capacidades de análisis de datos utilizando herramientas y técnicas modernas. Mantente atento para más detalles.',
-      'project.data-analysis-placeholder.feature1': 'Visualización de datos con Power BI',
-      'project.data-analysis-placeholder.feature2': 'Procesamiento de datos con Python y Pandas',
-      'project.data-analysis-placeholder.feature3': 'Integración con Excel para reportes',
-      
+      'project.data-analysis-superstore.title': 'Análisis de Datos de Ventas Superstore',
+      'project.data-analysis-superstore.description': 'Un dashboard interactivo completo de Business Intelligence en Power BI para análisis de ventas minoristas.',
+      'project.data-analysis-superstore.longDescription': 'Dashboard de Business Intelligence basado en Power BI que demuestra análisis de datos profesional desde exploración hasta visualización. Incluye limpieza y validación de 9,800 transacciones, diseño de modelo dimensional (Star Schema) con 5 tablas relacionadas, 7 KPIs con fórmulas DAX, 4 páginas interactivas con 11+ visualizaciones y documentación técnica completa. Implementa transformaciones de datos con Power Query, relaciones 1:N correctamente establecidas, análisis temporal y geográfico, segmentación de clientes y detección de patrones de estacionalidad para optimización comercial.',
+      'project.data-analysis-superstore.feature1': 'Modelo de datos dimensional (Star Schema) con 1 Fact Table y 4 Dimension Tables',
+      'project.data-analysis-superstore.feature2': '7 KPIs definidos con fórmulas DAX (Ventas Totales, Ticket Promedio, Clientes Únicos, etc.)',
+      'project.data-analysis-superstore.feature3': 'Visualizaciones avanzadas: tarjetas, líneas de tendencia, gráficos de distribución, mapas geográficos y tablas dinámicas',
+      'project.data-analysis-superstore.challenge1': 'Limpieza y validación de datos: corrección de errores de importación (separador decimal), eliminación de duplicados en dimensiones',
+      'project.data-analysis-superstore.challenge2': 'Diseño de modelo relacional: estructura Star Schema con relaciones 1:N correctas, garantizando integridad referencial',
+      'project.data-analysis-superstore.challenge3': 'Análisis multidimensional: integración de análisis por región, producto, cliente y período temporal en un solo dashboard coherente',
+
       // Experience Section
       'experience.title': 'Experiencia',
       'experience.empty.title': 'No hay datos de experiencia disponibles',
