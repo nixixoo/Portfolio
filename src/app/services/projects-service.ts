@@ -27,7 +27,7 @@ export class ProjectsService {
   // Project data stored in signal for reactivity
   private readonly projectsState = signal<readonly ProjectData[]>([
     {
-      id: 'Portfolio',
+      id: 'portfolio',
       title: '', 
       description: '', 
       longDescription: '', 
@@ -42,7 +42,7 @@ export class ProjectsService {
       challenges: [] 
     },
     {
-      id: 'My Notex',
+      id: 'mynotex',
       title: '', 
       description: '',  
       longDescription: '', 
@@ -58,7 +58,7 @@ export class ProjectsService {
       challenges: [] 
     },
     {
-      id: 'Abyss Team Request',
+      id: 'abysstr',
       title: '', 
       description: '', 
       longDescription: '', 
@@ -73,8 +73,8 @@ export class ProjectsService {
       challenges: [] 
     },
     {
-      id: 'Task API',
-      title: '', 
+      id: 'taskapi',
+      title: 'Task API', 
       description: '', 
       longDescription: '', 
       imageUrl: '/images/Express.png',
@@ -87,7 +87,7 @@ export class ProjectsService {
       challenges: [] 
     },
     {
-      id: 'Library Management System',
+      id: 'library-management-system',
       title: '', 
       description: '',
       longDescription: '',
@@ -101,7 +101,7 @@ export class ProjectsService {
       challenges: []
     },
     {
-      id: 'Data Analysis Sales Superstore',
+      id: 'data-analysis-superstore',
       title: '', 
       description: '',
       longDescription: '',
